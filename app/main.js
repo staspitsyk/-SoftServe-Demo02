@@ -1,3 +1,3 @@
-import {AnimalController} from './components/Animal/AnimalController.js';
+import { AnimalController } from './components/Animal/AnimalController.js';
 
 const animal = new AnimalController();
