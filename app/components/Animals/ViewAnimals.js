@@ -5,7 +5,7 @@ export class ViewAnimals {
 
     renderAnimals(arr){
         console.log(arr);
-        document.body.innerHTML = `<img src='data:image/jpg;base64,${arr[1].image}'/>`
+        // document.body.innerHTML = `<img src='data:image/jpg;base64,${arr[1].image}'/>`
     }
 }
 
