@@ -1,6 +1,7 @@
 export class AnimalModel {
     constructor() {
         this.link = 'data/data.json';
+        this.parsedData = null;
     }
 
     calculateAge(date) {
@@ -31,10 +32,10 @@ export class AnimalModel {
         try {
             const response = await fetch(this.link);
 
-            const data = await response.json();
+            this.parsedData = await response.json();
+            const data = this.parsedData.slice();
 
-            data.forEach(obj => obj.birth_date = this.calculateAge(obj.birth_date));
-
+            data.forEach(animals => animals.birth_date = this.calculateAge(animals.birth_date));
             return data;
         } catch (err) {
             console.log(err);

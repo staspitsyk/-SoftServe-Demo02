@@ -4,13 +4,12 @@ import { AnimalView } from "./AnimalView.js";
 export class AnimalController {
     constructor() {
         this.model = new AnimalModel();
-
-        this.view = new AnimalView(this.handleLoadAnimals.bind(this));
+        this.view = new AnimalView();
+        this.handleLoadAnimals();
     }
 
     handleLoadAnimals() {
-        console.log(2)
         this.model.getArrOfAnimals()
-            .then(arr => this.view.renderAnimals(arr));
+            .then(animals => this.view.renderAnimals(animals));
     }
 }

@@ -1,13 +1,10 @@
 export class AnimalView {
-  constructor(cb) {
-      this.container = document.getElementById('myId');
-
-      document.addEventListener("DOMContentLoaded", cb);
+  constructor() {
+      this.container = document.querySelector('.animals-container');
   }
 
-  renderAnimals(arr) {
-    console.log(arr);
-      this.container.innerHTML = arr.map(animal => this.getSingleAnimal(animal)).join('');
+  renderAnimals(animals) {
+      this.container.innerHTML = animals.map(animal => this.getSingleAnimal(animal)).join('');
   }
 
   getSingleAnimal({
@@ -19,21 +16,33 @@ export class AnimalView {
       price,
   }) {
 
-      return `<article class="card product-item">
-      <div class="card__image">
-          <img src="data:image/jpg;base64,${image}" alt="A ${species}">
+    return ` 
+      <div class="col-lg-4 col-md-12 mb-4">
+        <div class="card">
+          <div class="view view-cascade overlay">
+            <img src="data:image/jpg;base64,${image}" class="card-img-top"
+              alt="sample photo">
+            <a>
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+
+          <div class="card-body">
+            <h4 class="card-title indigo-text text-capitalize">
+              ${breed}
+              <p class="mb-1 grey-text"><small>${gender} ${species}</small></p>
+            </h4>
+            <p class="card-text">
+              ${birth_date}
+            </p>
+
+            <p class="mb-1"><strong>$${price}</strong></p>
+
+            <button type="button" class="btn btn-indigo btn-rounded btn-sm px-3">Add to cart</button>
+            <button type="button" class="btn btn-outline-indigo btn-rounded btn-sm px-3 waves-effect">Details</button>
+          </div>
+        </div>
       </div>
-      <header class="card__header">
-        <h1 class="product__title">${breed}</h1>
-    </header>
-      <div class="card__content">
-          <h2 class="product__price">${species} ${gender}</h2>
-          <p class="product__description">Age: ${birth_date}</p>
-          <p class="product__description">Price: $${price}</p>
-      </div>
-      <div class="card__actions">
-          <button class="btn">Add to Cart</button>
-      </div>
-  </article>`;
+    `;
   }
 }
