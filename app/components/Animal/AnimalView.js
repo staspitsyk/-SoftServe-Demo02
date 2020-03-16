@@ -9,7 +9,7 @@ export class AnimalView {
       .join('');
   }
 
-  getSingleAnimal({ image, breed, species, gender, birth_date, price }) {
+  getSingleAnimal({ image, breed, species, gender, age, price }) {
     return ` 
       <div class="col-lg-4 col-md-12 mb-4">
         <div class="card">
@@ -27,7 +27,7 @@ export class AnimalView {
               <p class="mb-1 grey-text"><small>${gender} ${species}</small></p>
             </h5>
             <p class="card-text">
-              ${birth_date}
+              ${age}
             </p>
 
             <p class="mb-1"><strong>$${price}</strong></p>

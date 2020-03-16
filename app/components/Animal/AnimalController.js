@@ -13,4 +13,9 @@ export class AnimalController {
       .getArrOfAnimals()
       .then(animals => this.view.renderAnimals(animals));
   }
+
+  handleSearch(str) {
+    const data = this.model.searchName(str);
+    this.view.renderAnimals(data)
+  }
 }

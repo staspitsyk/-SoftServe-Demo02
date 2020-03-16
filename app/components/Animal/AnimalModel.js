@@ -1,7 +1,6 @@
 export class AnimalModel {
   constructor() {
     this.link = 'data/data.json';
-    this.parsedData = null;
   }
 
   calculateAge(date) {
@@ -32,14 +31,18 @@ export class AnimalModel {
       const response = await fetch(this.link);
 
       this.parsedData = await response.json();
-      const data = this.parsedData.slice();
 
-      data.forEach(
-        animals => (animals.birth_date = this.calculateAge(animals.birth_date))
+      this.parsedData.forEach(
+        animals => (animals.age = this.calculateAge(animals.birth_date))
       );
-      return data;
+      return this.parsedData;
     } catch (err) {
       console.log(err);
     }
+  }
+
+  searchName(str) {
+    const regSearch = new RegExp(str, 'i');
+    return this.parsedData.filter(({breed}) => regSearch.test(breed));
   }
 }
