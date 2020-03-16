@@ -1,7 +1,7 @@
 export class AnimalModel {
   constructor() {
     this.link = 'data/data.json';
-    this.parsedData = null;
+    this.data = [];
   }
 
   calculateAge(date) {
@@ -31,15 +31,41 @@ export class AnimalModel {
     try {
       const response = await fetch(this.link);
 
-      this.parsedData = await response.json();
-      const data = this.parsedData.slice();
+      this.data = await response.json();
 
-      data.forEach(
-        animals => (animals.birth_date = this.calculateAge(animals.birth_date))
+      this.data.forEach(
+        animals => (animals.age = this.calculateAge(animals.birth_date))
       );
-      return data;
+
+      const filter = sessionStorage.getItem('filter');
+
+      if (filter) {
+        const filteredAnimals = this.filter(filter, 'filter');
+
+        return filteredAnimals;
+      } else {
+
+        return this.data;
+      }
+
     } catch (err) {
       console.log(err);
     }
+  }
+
+  filter(str, type) {
+
+    if (str === 'Other' && type === 'filter') {
+      return this.data.filter(({ species }) => (species !== 'dog' && species !== 'cat' && species !== 'fish' && species !== 'bird') );
+    }
+
+    if (str === 'All' && type === 'filter') {
+      return this.data;
+    }
+
+    const regSearch = new RegExp(str, 'i');
+
+    return this.data.filter(({ breed, species }) => regSearch.test( type === 'search' ? breed : species ));
+
   }
 }

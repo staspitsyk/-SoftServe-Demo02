@@ -9,13 +9,13 @@ export class AnimalView {
       .join('');
   }
 
-  getSingleAnimal({ image, breed, species, gender, birth_date, price }) {
+  getSingleAnimal({ image, breed, species, gender, age, price }) {
     return ` 
-      <div class="col-lg-4 col-md-12 mb-4">
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
         <div class="card">
           <div class="view view-cascade overlay">
-            <img src="data:image/jpg;base64,${image}" class="card-img-top"
-              alt="sample photo">
+            <img src="data:image/jpg;base64,${image}" class="card-img-top animal__image"
+              alt="A ${species}">
             <a>
               <div class="mask rgba-white-slight"></div>
             </a>
@@ -27,7 +27,7 @@ export class AnimalView {
               <p class="mb-1 grey-text"><small>${gender} ${species}</small></p>
             </h4>
             <p class="card-text">
-              ${birth_date}
+              ${age}
             </p>
 
             <p class="mb-1"><strong>$${price}</strong></p>

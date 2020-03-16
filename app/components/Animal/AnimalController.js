@@ -9,8 +9,18 @@ export class AnimalController {
   }
 
   handleLoadAnimals() {
-    this.model
+      this.model
       .getArrOfAnimals()
       .then(animals => this.view.renderAnimals(animals));
+  }
+
+  handleSearch(str) {
+    const animals = this.model.filter(str, 'search');
+    this.view.renderAnimals(animals);
+  }
+
+  handleFilter(str) {
+    const animals = this.model.filter(str, 'filter');
+    this.view.renderAnimals(animals);
   }
 }
