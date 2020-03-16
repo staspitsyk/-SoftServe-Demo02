@@ -14,6 +14,7 @@ export class SearchFilterController {
     }
 
     handleSearch = () => {
-        this.handleSearchMessage(this.view.getSearchValue);
+        const searchValue = this.view.getSearchValue();
+        this.handleSearchMessage(searchValue);
     }
 }
