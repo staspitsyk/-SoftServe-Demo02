@@ -45,4 +45,16 @@ export class AnimalModel {
     const regSearch = new RegExp(str, 'i');
     return this.parsedData.filter(({breed}) => regSearch.test(breed));
   }
+
+  filterSpecies(str) {
+    return this.parsedData.filter(({species}) => {
+      if (str === 'all') { // ???
+        return true;
+      }
+      if (str === 'other') {
+        return species !== 'cat' && species !== 'dog' && species !== 'fish' && species !== 'bird' //???
+      }
+      return str === species
+    })
+  }
 }

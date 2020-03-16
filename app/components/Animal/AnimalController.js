@@ -18,4 +18,9 @@ export class AnimalController {
     const data = this.model.searchName(str);
     this.view.renderAnimals(data)
   }
+
+  handleFilter(str) {
+    const data = this.model.filterSpecies(str);
+    this.view.renderAnimals(data);
+  }
 }
