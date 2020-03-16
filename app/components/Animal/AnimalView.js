@@ -14,18 +14,18 @@ export class AnimalView {
       <div class="col-lg-4 col-md-12 mb-4">
         <div class="card">
           <div class="view view-cascade overlay">
-            <img src="data:image/jpg;base64,${image}" class="card-img-top"
-              alt="sample photo">
+            <img src="${image}" class="card-img-top"
+              alt="sample photo" style="height: 244px;">
             <a>
               <div class="mask rgba-white-slight"></div>
             </a>
           </div>
 
           <div class="card-body">
-            <h4 class="card-title indigo-text text-capitalize">
+            <h5 class="card-title indigo-text text-capitalize">
               ${breed}
               <p class="mb-1 grey-text"><small>${gender} ${species}</small></p>
-            </h4>
+            </h5>
             <p class="card-text">
               ${birth_date}
             </p>
