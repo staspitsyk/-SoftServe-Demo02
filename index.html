@@ -22,10 +22,7 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark indigo">
-      <!-- Navbar brand -->
-      <a class="navbar-brand" href="#">Navbar</a>
-
+    <nav class="container navbar navbar-expand-lg navbar-dark indigo">
       <!-- Collapse button -->
       <button
         class="navbar-toggler"
@@ -55,9 +52,19 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Pricing</a>
           </li>
+        </ul>
+        <!-- Links -->
 
-          <!-- Dropdown -->
-          <li class="nav-item dropdown">
+        <form class="form-inline">
+          <div class="md-form my-0">
+            <input
+              class="inp-search form-control mr-sm-2"
+              type="text"
+              placeholder="Search"
+              aria-label="Search"
+            />
+          </div>
+          <div class="nav-item dropdown navbar-nav mr-auto">
             <a
               class="nav-link dropdown-toggle"
               id="navbarDropdownMenuLink"
@@ -77,18 +84,6 @@
               <a data-id='fish' class="dropdown-item" href="#">Fish</a>
               <a data-id='other' class="dropdown-item" href="#">Other</a>
             </div>
-          </li>
-        </ul>
-        <!-- Links -->
-
-        <form class="form-inline">
-          <div class="md-form my-0">
-            <input
-              class="inp-search form-control mr-sm-2"
-              type="text"
-              placeholder="Search"
-              aria-label="Search"
-            />
           </div>
         </form>
       </div>
