@@ -36,13 +36,33 @@ export class AnimalModel {
       this.data.forEach(
         animals => (animals.age = this.calculateAge(animals.birth_date))
       );
-      return this.data;
+
+      const filter = sessionStorage.getItem('filter');
+
+      if (filter) {
+        const filteredAnimals = this.filter(filter, 'filter');
+
+        return filteredAnimals;
+      } else {
+
+        return this.data;
+      }
+
     } catch (err) {
       console.log(err);
     }
   }
 
   filter(str, type) {
+
+    if (str === 'Other' && type === 'filter') {
+      return this.data.filter(({ species }) => (species !== 'dog' && species !== 'cat' && species !== 'fish' && species !== 'bird') );
+    }
+
+    if (str === 'All' && type === 'filter') {
+      return this.data;
+    }
+
     const regSearch = new RegExp(str, 'i');
 
     return this.data.filter(({ breed, species }) => regSearch.test( type === 'search' ? breed : species ));

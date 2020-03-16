@@ -12,7 +12,8 @@ export class SearchFilterController {
     }
 
     handleFilter(event) {
-        const value = event.target.textContent
+        const value = event.target.textContent;
+        sessionStorage.setItem('filter', value);
         this.handleSearchSpecies(value);
     }
 }

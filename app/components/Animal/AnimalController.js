@@ -9,7 +9,7 @@ export class AnimalController {
   }
 
   handleLoadAnimals() {
-    this.model
+      this.model
       .getArrOfAnimals()
       .then(animals => this.view.renderAnimals(animals));
   }
