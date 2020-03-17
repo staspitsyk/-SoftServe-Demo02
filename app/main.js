@@ -3,5 +3,7 @@ import { SearchFilterController } from './components/SearchFilter/SearchFilterCo
 
 const animal = new AnimalController();
 
-const search = new SearchFilterController(animal.handleSearch.bind(animal), animal.handleFilter.bind(animal));
-
+const search = new SearchFilterController(
+  animal.handleSearch.bind(animal),
+  animal.handleFilter.bind(animal)
+);

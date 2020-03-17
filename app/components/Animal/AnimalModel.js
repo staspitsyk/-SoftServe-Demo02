@@ -44,19 +44,22 @@ export class AnimalModel {
 
         return filteredAnimals;
       } else {
-
         return this.data;
       }
-
     } catch (err) {
       console.log(err);
     }
   }
 
   filter(str, type) {
-
     if (str === 'Other' && type === 'filter') {
-      return this.data.filter(({ species }) => (species !== 'dog' && species !== 'cat' && species !== 'fish' && species !== 'bird') );
+      return this.data.filter(
+        ({ species }) =>
+          species !== 'dog' &&
+          species !== 'cat' &&
+          species !== 'fish' &&
+          species !== 'bird'
+      );
     }
 
     if (str === 'All' && type === 'filter') {
@@ -65,7 +68,8 @@ export class AnimalModel {
 
     const regSearch = new RegExp(str, 'i');
 
-    return this.data.filter(({ breed, species }) => regSearch.test( type === 'search' ? breed : species ));
-
+    return this.data.filter(({ breed, species }) =>
+      regSearch.test(type === 'search' ? breed : species)
+    );
   }
 }
