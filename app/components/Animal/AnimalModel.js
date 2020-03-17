@@ -1,6 +1,6 @@
 export class AnimalModel {
   constructor() {
-    this.link = 'data/data.json';
+    this.link = "data/data.json";
     this.data = [];
     this.filteredData = this.data;
   }
@@ -38,10 +38,12 @@ export class AnimalModel {
         animals => (animals.age = this.calculateAge(animals.birth_date))
       );
 
-      const filter = sessionStorage.getItem('filter');
+      this.filteredData = this.data.slice();
+
+      const filter = sessionStorage.getItem("filter");
 
       if (filter) {
-        const filteredAnimals = this.filter(filter, 'filter');
+        const filteredAnimals = this.filter(filter, "filter");
 
         return filteredAnimals;
       } else {
@@ -82,15 +84,14 @@ export class AnimalModel {
 
     if (str === 'other' && type === 'filter') {
       this.filteredData = this.data.filter(
-        ({ species }) =>
-          species !== 'dog' &&
-          species !== 'cat' &&
-          species !== 'fish' &&
-          species !== 'bird'
-      );
-
-      return this.filteredData;
+        
+    if (type === "filter") {
+      this.typeFilter = str;
     }
+
+    if (type === "filter" && str === "other") {
+      return this.data.filter(
+
 
     if (str === 'all' && type === 'filter') {
       this.filteredData = this.data;
@@ -102,11 +103,16 @@ export class AnimalModel {
     return this.filteredData;
   }
 
-  sort(str) {
-    if (str === 'age') {
-      return this.filteredData.sort( (prevAnimal, nextAnimal) => prevAnimal.birth_date - nextAnimal.birth_date);
-    } else if (str === 'price') {
-      return this.filteredData.sort( (prevAnimal, nextAnimal) => nextAnimal.price - prevAnimal.price);
+  sort(condition) {
+    switch (condition) {
+      case "Price (high)":
+        return this.filteredData.sort((a, b) => b.price - a.price);
+      case "Price (low)":
+        return this.filteredData.sort((a, b) => a.price - b.price);
+      case "Age (high)":
+        return this.filteredData.sort((a, b) => a.birth_date - b.birth_date);
+      case "Age (low)":
+        return this.filteredData.sort((a, b) => b.birth_date - a.birth_date);
     }
   }
 }

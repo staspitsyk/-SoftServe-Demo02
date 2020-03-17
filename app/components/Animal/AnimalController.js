@@ -1,15 +1,17 @@
-import { AnimalModel } from './AnimalModel.js';
-import { AnimalView } from './AnimalView.js';
+import { AnimalModel } from "./AnimalModel.js";
+import { AnimalView } from "./AnimalView.js";
 
 export class AnimalController {
   constructor({ subscribe }) {
     this.model = new AnimalModel();
     this.view = new AnimalView();
     this.handleLoadAnimals();
+
     this.subscribe = subscribe;
-    this.subscribe('search', this.handleSearch.bind(this));
-    this.subscribe('filter', this.handleFilter.bind(this));
-    this.subscribe('sort', this.handleSort.bind(this));
+    this.subscribe("search", this.handleSearch.bind(this));
+    this.subscribe("filter", this.handleFilter.bind(this));
+    this.subscribe("sort", this.handleSort.bind(this));
+
   }
 
   handleLoadAnimals() {
@@ -19,12 +21,17 @@ export class AnimalController {
   }
 
   handleSearch(str) {
-    const animals = this.model.filter(str, 'search');
+    const animals = this.model.filter(str, "search");
     this.view.renderAnimals(animals);
   }
 
   handleFilter(str) {
-    const animals = this.model.filter(str, 'filter');
+    const animals = this.model.filter(str, "filter");
+    this.view.renderAnimals(animals);
+  }
+
+  handleSort(condition) {
+    const animals = this.model.sort(condition);
     this.view.renderAnimals(animals);
   }
 

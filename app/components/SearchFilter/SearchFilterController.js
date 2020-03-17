@@ -1,4 +1,4 @@
-import { SearchFilterView } from './SearchFilterView.js';
+import { SearchFilterView } from "./SearchFilterView.js";
 
 export class SearchFilterController {
   constructor({ notify }) {
@@ -10,11 +10,14 @@ export class SearchFilterController {
   }
 
   handleSearch() {
-    this.notify('search', this.view.getSearchValue());
+
+    const value = this.view.getSearchValue();
+    this.notify("search", value);
   }
 
   handleFilter(value) {
-    sessionStorage.setItem('filter', value);
-    this.notify('filter', value);
+    sessionStorage.setItem("filter", value);
+    this.notify("filter", value);
+
   }
 }
