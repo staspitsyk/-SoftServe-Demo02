@@ -2,6 +2,7 @@ export class AnimalModel {
   constructor() {
     this.link = 'data/data.json';
     this.data = [];
+    this.filteredData = this.data;
   }
 
   calculateAge(date) {
@@ -52,24 +53,60 @@ export class AnimalModel {
   }
 
   filter(str, type) {
+    const filter = sessionStorage.getItem('filter');
+
+    const regSearch = new RegExp(str, 'i');
+
+    if (filter && type === 'search') {
+      if (filter === 'all') {
+        this.filteredData = this.data.filter(({ breed }) => regSearch.test(breed));
+
+        return this.filteredData;
+      } else if (filter === 'other') {
+        this.filteredData = this.data.filter(
+          ({ species, breed }) =>
+            species !== 'dog' &&
+            species !== 'cat' &&
+            species !== 'fish' &&
+            species !== 'bird' &&
+            regSearch.test(breed)
+        );
+
+        return this.filteredData;
+      } else {
+        this.filteredData = this.data.filter(({ breed, species }) => regSearch.test(breed) && filter === species);
+
+        return this.filteredData;
+      }
+    }
+
     if (str === 'other' && type === 'filter') {
-      return this.data.filter(
+      this.filteredData = this.data.filter(
         ({ species }) =>
           species !== 'dog' &&
           species !== 'cat' &&
           species !== 'fish' &&
           species !== 'bird'
       );
+
+      return this.filteredData;
     }
 
     if (str === 'all' && type === 'filter') {
-      return this.data;
+      this.filteredData = this.data;
+
+      return this.filteredData;
     }
+    this.filteredData = this.data.filter(({ breed, species }) => regSearch.test(type === 'search' ? breed : species));
 
-    const regSearch = new RegExp(str, 'i');
+    return this.filteredData;
+  }
 
-    return this.data.filter(({ breed, species }) =>
-      regSearch.test(type === 'search' ? breed : species)
-    );
+  sort(str) {
+    if (str === 'age') {
+      return this.filteredData.sort( (prevAnimal, nextAnimal) => prevAnimal.birth_date - nextAnimal.birth_date);
+    } else if (str === 'price') {
+      return this.filteredData.sort( (prevAnimal, nextAnimal) => nextAnimal.price - prevAnimal.price);
+    }
   }
 }

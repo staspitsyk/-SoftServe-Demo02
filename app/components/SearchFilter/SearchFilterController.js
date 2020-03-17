@@ -1,21 +1,20 @@
 import { SearchFilterView } from './SearchFilterView.js';
 
 export class SearchFilterController {
-  constructor(handlS, handlF) {
+  constructor({ notify }) {
     this.view = new SearchFilterView(
       this.handleSearch.bind(this),
       this.handleFilter.bind(this)
     );
-    this.handleSearchBreed = handlS;
-    this.handleSearchSpecies = handlF;
+    this.notify = notify;
   }
 
   handleSearch() {
-    this.handleSearchBreed(this.view.getSearchValue());
+    this.notify('search', this.view.getSearchValue());
   }
 
   handleFilter(value) {
     sessionStorage.setItem('filter', value);
-    this.handleSearchSpecies(value);
+    this.notify('filter', value);
   }
 }

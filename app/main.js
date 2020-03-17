@@ -1,9 +1,12 @@
 import { AnimalController } from './components/Animal/AnimalController.js';
 import { SearchFilterController } from './components/SearchFilter/SearchFilterController.js';
+import { Publisher } from './helper/Publisher.js';
+import { SortController } from './components/Sort/SortController.js';
 
-const animal = new AnimalController();
+const publisher = new Publisher();
 
-const search = new SearchFilterController(
-  animal.handleSearch.bind(animal),
-  animal.handleFilter.bind(animal)
-);
+const animal = new AnimalController(publisher.methods);
+
+const search = new SearchFilterController(publisher.methods);
+
+const sort = new SortController(publisher.methods);
