@@ -2,8 +2,7 @@ export class AnimalModel {
   constructor() {
     this.link = "data/data.json";
     this.data = [];
-    this.filteredData = [];
-    this.typeFilter = "all";
+    this.filteredData = this.data;
   }
 
   calculateAge(date) {
@@ -56,37 +55,51 @@ export class AnimalModel {
   }
 
   filter(str, type) {
+    const filter = sessionStorage.getItem('filter');
+
+    const regSearch = new RegExp(str, 'i');
+
+    if (filter && type === 'search') {
+      if (filter === 'all') {
+        this.filteredData = this.data.filter(({ breed }) => regSearch.test(breed));
+
+        return this.filteredData;
+      } else if (filter === 'other') {
+        this.filteredData = this.data.filter(
+          ({ species, breed }) =>
+            species !== 'dog' &&
+            species !== 'cat' &&
+            species !== 'fish' &&
+            species !== 'bird' &&
+            regSearch.test(breed)
+        );
+
+        return this.filteredData;
+      } else {
+        this.filteredData = this.data.filter(({ breed, species }) => regSearch.test(breed) && filter === species);
+
+        return this.filteredData;
+      }
+    }
+
+    if (str === 'other' && type === 'filter') {
+      this.filteredData = this.data.filter(
+        
     if (type === "filter") {
       this.typeFilter = str;
     }
 
     if (type === "filter" && str === "other") {
       return this.data.filter(
-        ({ species }) =>
-          species !== "dog" &&
-          species !== "cat" &&
-          species !== "fish" &&
-          species !== "bird"
-      );
+
+
+    if (str === 'all' && type === 'filter') {
+      this.filteredData = this.data;
+
+      return this.filteredData;
     }
+    this.filteredData = this.data.filter(({ breed, species }) => regSearch.test(type === 'search' ? breed : species));
 
-    if (type === "filter" && str === "all") {
-      return this.data;
-    }
-
-    const regSearch = new RegExp(str, "i");
-
-    this.filteredData = this.data.filter(({ breed, species }) => {
-      if (this.typeFilter === "all") {
-        return regSearch.test(type === "search" ? breed : species);
-      } else {
-        return (
-          regSearch.test(type === "search" ? breed : species) &&
-          species === this.typeFilter
-        );
-      }
-      // ??? OTHER ???
-    });
     return this.filteredData;
   }
 

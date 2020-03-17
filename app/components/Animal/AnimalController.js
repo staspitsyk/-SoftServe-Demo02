@@ -11,6 +11,7 @@ export class AnimalController {
     this.subscribe("search", this.handleSearch.bind(this));
     this.subscribe("filter", this.handleFilter.bind(this));
     this.subscribe("sort", this.handleSort.bind(this));
+
   }
 
   handleLoadAnimals() {
@@ -31,6 +32,11 @@ export class AnimalController {
 
   handleSort(condition) {
     const animals = this.model.sort(condition);
+    this.view.renderAnimals(animals);
+  }
+
+  handleSort(str) {
+    const animals = this.model.sort(str);
     this.view.renderAnimals(animals);
   }
 }

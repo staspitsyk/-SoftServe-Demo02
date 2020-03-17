@@ -10,6 +10,7 @@ export class SearchFilterController {
   }
 
   handleSearch() {
+
     const value = this.view.getSearchValue();
     this.notify("search", value);
   }
@@ -17,5 +18,6 @@ export class SearchFilterController {
   handleFilter(value) {
     sessionStorage.setItem("filter", value);
     this.notify("filter", value);
+
   }
 }
