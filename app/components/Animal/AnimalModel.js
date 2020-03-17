@@ -2,6 +2,7 @@ export class AnimalModel {
   constructor() {
     this.link = 'data/data.json';
     this.data = [];
+    this.typeFilter = 'all';
   }
 
   calculateAge(date) {
@@ -52,7 +53,11 @@ export class AnimalModel {
   }
 
   filter(str, type) {
-    if (str === 'other' && type === 'filter') {
+    if (type === 'filter') {
+      this.typeFilter = str;
+    }
+
+    if (type === 'filter' && str === 'other') {
       return this.data.filter(
         ({ species }) =>
           species !== 'dog' &&
@@ -62,14 +67,19 @@ export class AnimalModel {
       );
     }
 
-    if (str === 'all' && type === 'filter') {
+    if (type === 'filter' && str === 'all') {
       return this.data;
     }
 
     const regSearch = new RegExp(str, 'i');
 
-    return this.data.filter(({ breed, species }) =>
-      regSearch.test(type === 'search' ? breed : species)
-    );
+    return this.data.filter(({ breed, species }) => {
+        if(this.typeFilter === 'all') {
+          return regSearch.test(type === 'search' ? breed : species); 
+        } else {
+          return regSearch.test(type === 'search' ? breed : species) && species === this.typeFilter;
+        }
+        // ??? OTHER ???
+    });
   }
 }
