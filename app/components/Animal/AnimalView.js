@@ -14,7 +14,7 @@ export class AnimalView {
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
         <div class="card">
           <div class="view view-cascade overlay">
-            <img src="data:image/jpg;base64,${image}" class="card-img-top animal__image"
+            <img src="${image}" class="card-img-top animal__image"
               alt="A ${species}">
             <a>
               <div class="mask rgba-white-slight"></div>
@@ -22,10 +22,10 @@ export class AnimalView {
           </div>
 
           <div class="card-body">
-            <h4 class="card-title indigo-text text-capitalize">
+            <h5 class="card-title indigo-text text-capitalize">
               ${breed}
               <p class="mb-1 grey-text"><small>${gender} ${species}</small></p>
-            </h4>
+            </h5>
             <p class="card-text">
               ${age}
             </p>

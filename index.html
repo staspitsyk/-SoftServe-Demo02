@@ -15,7 +15,7 @@
 
 <body>
   <header>
-    <nav class="navbar navbar-expand-lg navbar-dark indigo">
+    <nav class="container navbar navbar-expand-lg navbar-dark indigo">
       <!-- Navbar brand -->
       <a class="navbar-brand" href="#">Navbar</a>
 
@@ -40,23 +40,23 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Pricing</a>
           </li>
-
-          <!-- Dropdown -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">Filter</a>
-            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">All</a>
-              <a class="dropdown-item" href="#">Cat</a>
-              <a class="dropdown-item" href="#">Dog</a>
-              <a class="dropdown-item" href="#">Bird</a>
-              <a class="dropdown-item" href="#">Fish</a>
-              <a class="dropdown-item" href="#">Other</a>
-            </div>
-          </li>
         </ul>
         <!-- Links -->
 
+        <!-- Dropdown -->
+        <div class="nav-item dropdown navbar-nav">
+          <a class="nav-link dropdown-toggle nav-item active" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">Filter</a>
+          <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">All</a>
+            <a class="dropdown-item" href="#">Cat</a>
+            <a class="dropdown-item" href="#">Dog</a>
+            <a class="dropdown-item" href="#">Bird</a>
+            <a class="dropdown-item" href="#">Fish</a>
+            <a class="dropdown-item" href="#">Other</a>
+          </div>
+        </div>
+        <!-- Dropdown -->
         <form class="form-inline">
           <div class="md-form my-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
