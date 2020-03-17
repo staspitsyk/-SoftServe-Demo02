@@ -1,12 +1,12 @@
 export class AnimalView {
   constructor() {
-    this.container = document.querySelector('.animals-container');
+    this.container = document.querySelector(".animals-container");
   }
 
   renderAnimals(animals) {
     this.container.innerHTML = animals
       .map(animal => this.getSingleAnimal(animal))
-      .join('');
+      .join("");
   }
 
   getSingleAnimal({ image, breed, species, gender, age, price }) {

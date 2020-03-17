@@ -1,7 +1,6 @@
 import { SearchFilterView } from "./SearchFilterView.js";
 
 export class SearchFilterController {
-  // constructor(handlS, handlF) {
   constructor({ notify }) {
     this.view = new SearchFilterView(
       this.handleSearch.bind(this),
