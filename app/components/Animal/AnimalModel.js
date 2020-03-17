@@ -52,7 +52,7 @@ export class AnimalModel {
   }
 
   filter(str, type) {
-    if (str === 'Other' && type === 'filter') {
+    if (str === 'other' && type === 'filter') {
       return this.data.filter(
         ({ species }) =>
           species !== 'dog' &&
@@ -62,7 +62,7 @@ export class AnimalModel {
       );
     }
 
-    if (str === 'All' && type === 'filter') {
+    if (str === 'all' && type === 'filter') {
       return this.data;
     }
 

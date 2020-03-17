@@ -14,8 +14,7 @@ export class SearchFilterController {
     this.handleSearchBreed(this.view.getSearchValue());
   }
 
-  handleFilter(event) {
-    const value = event.target.textContent;
+  handleFilter(value) {
     sessionStorage.setItem('filter', value);
     this.handleSearchSpecies(value);
   }
