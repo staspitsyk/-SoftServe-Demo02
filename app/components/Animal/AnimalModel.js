@@ -1,7 +1,9 @@
 export class AnimalModel {
   constructor() {
-    this.link = 'data/data.json';
+    this.link = "data/data.json";
     this.data = [];
+    this.filteredData = [];
+    this.typeFilter = "all";
   }
 
   calculateAge(date) {
@@ -37,10 +39,12 @@ export class AnimalModel {
         animals => (animals.age = this.calculateAge(animals.birth_date))
       );
 
-      const filter = sessionStorage.getItem('filter');
+      this.filteredData = this.data.slice();
+
+      const filter = sessionStorage.getItem("filter");
 
       if (filter) {
-        const filteredAnimals = this.filter(filter, 'filter');
+        const filteredAnimals = this.filter(filter, "filter");
 
         return filteredAnimals;
       } else {
@@ -52,24 +56,50 @@ export class AnimalModel {
   }
 
   filter(str, type) {
-    if (str === 'other' && type === 'filter') {
+    if (type === "filter") {
+      this.typeFilter = str;
+    }
+
+    if (type === "filter" && str === "other") {
       return this.data.filter(
         ({ species }) =>
-          species !== 'dog' &&
-          species !== 'cat' &&
-          species !== 'fish' &&
-          species !== 'bird'
+          species !== "dog" &&
+          species !== "cat" &&
+          species !== "fish" &&
+          species !== "bird"
       );
     }
 
-    if (str === 'all' && type === 'filter') {
+    if (type === "filter" && str === "all") {
       return this.data;
     }
 
-    const regSearch = new RegExp(str, 'i');
+    const regSearch = new RegExp(str, "i");
 
-    return this.data.filter(({ breed, species }) =>
-      regSearch.test(type === 'search' ? breed : species)
-    );
+    this.filteredData = this.data.filter(({ breed, species }) => {
+      if (this.typeFilter === "all") {
+        return regSearch.test(type === "search" ? breed : species);
+      } else {
+        return (
+          regSearch.test(type === "search" ? breed : species) &&
+          species === this.typeFilter
+        );
+      }
+      // ??? OTHER ???
+    });
+    return this.filteredData;
+  }
+
+  sort(condition) {
+    switch (condition) {
+      case "Price (high)":
+        return this.filteredData.sort((a, b) => b.price - a.price);
+      case "Price (low)":
+        return this.filteredData.sort((a, b) => a.price - b.price);
+      case "Age (high)":
+        return this.filteredData.sort((a, b) => a.birth_date - b.birth_date);
+      case "Age (low)":
+        return this.filteredData.sort((a, b) => b.birth_date - a.birth_date);
+    }
   }
 }
