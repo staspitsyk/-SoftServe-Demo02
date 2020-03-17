@@ -7,8 +7,6 @@ export class SortController {
   }
 
   handleSort(value) {
-
     this.notify("sort", value);
   }
 }
-

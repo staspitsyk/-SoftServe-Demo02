@@ -1,6 +1,6 @@
 import { AnimalController } from "./components/Animal/AnimalController.js";
 import { SearchFilterController } from "./components/SearchFilter/SearchFilterController.js";
-import { Publisher } from "./helpers/Publisher.js";
+import { Publisher } from "./helper/Publisher.js";
 import { SortController } from "./components/Sort/SortController.js";
 
 const publisher = new Publisher();

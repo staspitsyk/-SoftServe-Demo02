@@ -11,7 +11,6 @@ export class AnimalController {
     this.subscribe("search", this.handleSearch.bind(this));
     this.subscribe("filter", this.handleFilter.bind(this));
     this.subscribe("sort", this.handleSort.bind(this));
-
   }
 
   handleLoadAnimals() {
