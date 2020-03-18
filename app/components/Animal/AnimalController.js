@@ -33,9 +33,4 @@ export class AnimalController {
     const animals = this.model.sort(condition);
     this.view.renderAnimals(animals);
   }
-
-  handleSort(str) {
-    const animals = this.model.sort(str);
-    this.view.renderAnimals(animals);
-  }
 }
