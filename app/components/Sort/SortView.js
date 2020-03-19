@@ -4,7 +4,8 @@ export class SortView {
     this.sortItems = document.querySelector(".sort-items");
     this.sortItems.addEventListener("click", event => {
       const value = this.getSortValue(event);
-      this.reRenderSortName(value);
+      const newSortName = event.target.innerText;
+      this.reRenderSortName(newSortName);
       cbSort(value);
     });
   }
@@ -14,7 +15,6 @@ export class SortView {
   }
 
   reRenderSortName(text) {
-    const capitilizedText = text.charAt(0).toUpperCase() + text.slice(1);
-    this.sortName.innerText = capitilizedText;
+    this.sortName.innerText = text;
   }
 }

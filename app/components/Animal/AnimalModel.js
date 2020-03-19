@@ -90,13 +90,13 @@ export class AnimalModel {
 
   sort(condition, data) {
     switch (condition) {
-      case "Price (high)":
+      case "price-high":
         return data.sort((a, b) => b.price - a.price);
-      case "Price (low)":
+      case "price-low":
         return data.sort((a, b) => a.price - b.price);
-      case "Age (high)":
+      case "age-high":
         return data.sort((a, b) => a.birth_date - b.birth_date);
-      case "Age (low)":
+      case "age-low":
         return data.sort((a, b) => b.birth_date - a.birth_date);
     }
   }
