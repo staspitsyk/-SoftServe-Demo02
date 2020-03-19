@@ -11,12 +11,10 @@ export class SearchFilterController {
 
   handleSearch() {
     const value = this.view.getSearchValue();
-    sessionStorage.setItem("search", value);
     this.notify("search", value);
   }
 
   handleFilter(value) {
-    sessionStorage.setItem("filter", value);
     this.notify("filter", value);
   }
 }

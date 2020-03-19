@@ -7,7 +7,6 @@ export class SortController {
   }
 
   handleSort(value) {
-    sessionStorage.setItem("sort", value);
     this.notify("sort", value);
   }
 }

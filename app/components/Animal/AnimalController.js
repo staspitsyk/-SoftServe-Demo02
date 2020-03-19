@@ -11,6 +11,7 @@ export class AnimalController {
     this.subscribe("search", this.handleSearch.bind(this));
     this.subscribe("filter", this.handleFilter.bind(this));
     this.subscribe("sort", this.handleSort.bind(this));
+    this.subscribe('pagination', this.handlePagination.bind(this));
   }
 
   handleLoadAnimals() {
@@ -20,20 +21,22 @@ export class AnimalController {
   }
 
   handleSearch(str) {
-
-    const animals = this.model.globalFilter();
+    const animals = this.model.globalFilter({search: str});
     this.view.renderAnimals(animals);
   }
 
   handleFilter(str) {
-
-    const animals = this.model.globalFilter();
+    const animals = this.model.globalFilter({filter: str});
     this.view.renderAnimals(animals);
   }
 
   handleSort(condition) {
+    const animals = this.model.globalFilter({sort: condition});
+    this.view.renderAnimals(animals);
+  }
 
-    const animals = this.model.globalFilter();
+  handlePagination(where = "next") {
+    const animals = this.model.getPaginationData(where);
     this.view.renderAnimals(animals);
   }
 }

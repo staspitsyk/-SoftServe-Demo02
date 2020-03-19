@@ -2,7 +2,8 @@ export class AnimalModel {
   constructor() {
     this.link = "data/data.json";
     this.data = [];
-    // this.filteredData = JSON.parse(JSON.stringify(this.data)) ;
+    this.paginationCount = 9;
+    this.paginationPage = 1;
 
   }
 
@@ -41,34 +42,34 @@ export class AnimalModel {
 
       this.filteredData = this.data.slice();
 
-      const filter = sessionStorage.getItem("filter");
+        return this.getPaginationData();
 
-      if (filter) {
-        const filteredAnimals = this.filter(filter, this.data);
-
-        return filteredAnimals;
-      } else {
-        return this.data;
-      }
     } catch (err) {
       console.log(err);
     }
   }
 
-  globalFilter() {
-    const filter = sessionStorage.getItem("filter");
-    const search = sessionStorage.getItem("search");
-    const sort = sessionStorage.getItem("sort");
+  globalFilter(options) {
 
-      if (filter) this.filteredData = this.filter(filter, this.data);
+    if (options.filter)  this.fitered = options.filter;
 
-      if (search) this.filteredData = this.search(search, this.filteredData);
+    if (options.search || options.search === '') this.searched = options.search;
 
-      if (sort) this.filteredData = this.sort(sort, this.filteredData);
+    if (options.sort) this.sorted = options.sort;
 
-      console.log(this.filteredData);
+    if (this.fitered) {
+      this.filteredData = this.filter(this.fitered, this.data);
+    }
 
-      return this.filteredData;
+    if (this.searched) {
+      this.filteredData = this.search(this.searched, this.filteredData);
+    }
+
+    if (this.sorted) {
+      this.filteredData = this.sort(this.sorted, this.filteredData);
+    }
+
+    return this.getPaginationData();
   }
 
   filter(str, data) {
@@ -80,17 +81,21 @@ export class AnimalModel {
     }
 
     if (str === "other") {
-      data =  data.filter(
-        ({ species}) =>
-          species !== "dog" &&
-          species !== "cat" &&
-          species !== "fish" &&
-          species !== "bird"
+      data = data.filter(
+        ({
+          species
+        }) =>
+        species !== "dog" &&
+        species !== "cat" &&
+        species !== "fish" &&
+        species !== "bird"
       );
       return data;
     }
 
-    data =  data.filter(({ species }) => regSearch.test(species));
+    data = data.filter(({
+      species
+    }) => regSearch.test(species));
 
     return data;
   }
@@ -99,12 +104,14 @@ export class AnimalModel {
 
     const regSearch = new RegExp(str, 'i');
 
-    data = data.filter(({ breed }) => regSearch.test(breed));
+    data = data.filter(({
+      breed
+    }) => regSearch.test(breed));
 
     return data;
   }
 
-  sort(condition, data) { 
+  sort(condition, data) {
 
     switch (condition) {
       case "Price (high)":
@@ -116,5 +123,24 @@ export class AnimalModel {
       case "Age (low)":
         return data.sort((a, b) => b.birth_date - a.birth_date);
     }
+  }
+
+  getPaginationData(where) {
+    switch(where) {
+      case 'next': {
+        this.paginationPage = this.filteredData.length / this.paginationCount > this.paginationPage ? this.paginationPage + 1: 1;
+        break;
+      }
+      case 'prev': {
+        this.paginationPage = this.paginationPage == 1 ? Math.ceil(this.filteredData.length / this.paginationCount) : this.paginationPage - 1;
+        break;
+      }
+      default: {
+        this.paginationPage = 1;
+      }
+    }
+    const from = (this.paginationPage - 1) * this.paginationCount;
+    const to = this.paginationPage * this.paginationCount;
+    return this.filteredData.slice(from, to);
   }
 }
