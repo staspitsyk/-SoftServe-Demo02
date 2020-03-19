@@ -1,11 +1,12 @@
 import { PaginationView } from "./PaginationView.js";
 
 export class PaginationController {
-  constructor() {
-    this.view = new PaginationView(this.handleClick);
+  constructor({ notify }) {
+    this.view = new PaginationView(this.handleClick.bind(this));
+    this.notify = notify;
   }
 
   handleClick(value) {
-    console.log(value);
+    this.notify("pagination", value);
   }
 }

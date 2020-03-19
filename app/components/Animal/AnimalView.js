@@ -4,9 +4,12 @@ export class AnimalView {
   }
 
   renderAnimals(animals) {
-    this.container.innerHTML = animals
-      .map(animal => this.getSingleAnimal(animal))
-      .join("");
+    const output = animals.map(animal => this.getSingleAnimal(animal)).join("");
+    this.container.innerHTML = `
+      <div class='row'>
+        ${output}
+      </div>
+    `;
   }
 
   getSingleAnimal({ image, breed, species, gender, age, price }) {

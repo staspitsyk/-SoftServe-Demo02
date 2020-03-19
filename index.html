@@ -127,21 +127,29 @@
     <main class="container mt-5">
       <section class="dark-grey-text text-center">
         <h3 class="font-weight-bold mb-4 pb-2">Our Pets</h3>
+        <div class="animals-container">
+          <!-- Spinner -->
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+          <!-- Spinner -->
+        </div>
         <!-- Pagination content -->
         <div class="row justify-content-center">
           <nav aria-label="Page navigation example">
             <ul class="pag-btns pagination pg-blue">
-              <li  class="page-item">
-                <a data-id='previous'class="page-link">Previous</a>
+              <li class="page-item">
+                <a data-id="previous" class="page-link">Previous</a>
               </li>
               <li class="page-item">
-                <a data-id='next' class="page-link">Next</a>
+                <a data-id="next" class="page-link">Next</a>
               </li>
             </ul>
           </nav>
         </div>
         <!-- Pagination content -->
-        <div class="animals-container row"></div>
       </section>
     </main>
 
