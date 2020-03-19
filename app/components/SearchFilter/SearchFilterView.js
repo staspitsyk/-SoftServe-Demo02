@@ -6,6 +6,9 @@ export class SearchFilterView {
     this.filterItems = document.querySelector(".filter-items");
     this.filterItems.addEventListener("click", event => {
       const value = this.getFilterValue(event);
+      if (!value) {
+        return;
+      }
       this.reRenderFilterName(value);
       cbFilter(value);
     });
