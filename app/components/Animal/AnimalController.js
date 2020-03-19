@@ -21,17 +21,17 @@ export class AnimalController {
   }
 
   handleSearch(str) {
-    const animals = this.model.globalFilter();
+    const animals = this.model.globalFilter({search: str});
     this.view.renderAnimals(animals);
   }
 
   handleFilter(str) {
-    const animals = this.model.globalFilter();
+    const animals = this.model.globalFilter({filter: str});
     this.view.renderAnimals(animals);
   }
 
   handleSort(condition) {
-    const animals = this.model.globalFilter();
+    const animals = this.model.globalFilter({sort: condition});
     this.view.renderAnimals(animals);
   }
 
