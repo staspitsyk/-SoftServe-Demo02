@@ -2,7 +2,8 @@ export class AnimalModel {
   constructor() {
     this.link = "data/data.json";
     this.data = [];
-    this.filteredData = this.data;
+    // this.filteredData = JSON.parse(JSON.stringify(this.data)) ;
+
   }
 
   calculateAge(date) {
@@ -43,7 +44,7 @@ export class AnimalModel {
       const filter = sessionStorage.getItem("filter");
 
       if (filter) {
-        const filteredAnimals = this.filter(filter, "filter");
+        const filteredAnimals = this.filter(filter, this.data);
 
         return filteredAnimals;
       } else {
@@ -54,73 +55,66 @@ export class AnimalModel {
     }
   }
 
-  filter(str, type) {
+  globalFilter() {
     const filter = sessionStorage.getItem("filter");
+    const search = sessionStorage.getItem("search");
+    const sort = sessionStorage.getItem("sort");
 
-    const regSearch = new RegExp(str, "i");
+      if (filter) this.filteredData = this.filter(filter, this.data);
 
-    if (filter && type === "search") {
-      if (filter === "all") {
-        this.filteredData = this.data.filter(({ breed }) =>
-          regSearch.test(breed)
-        );
+      if (search) this.filteredData = this.search(search, this.filteredData);
 
-        return this.filteredData;
-      } else if (filter === "other") {
-        this.filteredData = this.data.filter(
-          ({ species, breed }) =>
-            species !== "dog" &&
-            species !== "cat" &&
-            species !== "fish" &&
-            species !== "bird" &&
-            regSearch.test(breed)
-        );
+      if (sort) this.filteredData = this.sort(sort, this.filteredData);
 
-        return this.filteredData;
-      } else {
-        this.filteredData = this.data.filter(
-          ({ breed, species }) => regSearch.test(breed) && filter === species
-        );
+      console.log(this.filteredData);
 
-        return this.filteredData;
-      }
+      return this.filteredData;
+  }
+
+  filter(str, data) {
+
+    const regSearch = new RegExp(str, 'i');
+
+    if (str === "all") {
+      return data;
     }
 
-    if (str === "other" && type === "filter") {
-      this.filteredData = this.data.filter(
-        ({ species }) =>
+    if (str === "other") {
+      data =  data.filter(
+        ({ species}) =>
           species !== "dog" &&
           species !== "cat" &&
           species !== "fish" &&
           species !== "bird"
       );
-
-      return this.filteredData;
+      return data;
     }
 
-    if (str === "all" && type === "filter") {
-      this.filteredData = this.data;
+    data =  data.filter(({ species }) => regSearch.test(species));
 
-      return this.filteredData;
-    }
-
-    this.filteredData = this.data.filter(({ breed, species }) =>
-      regSearch.test(type === "search" ? breed : species)
-    );
-
-    return this.filteredData;
+    return data;
   }
 
-  sort(condition) {
+  search(str, data) {
+
+    const regSearch = new RegExp(str, 'i');
+
+    data = data.filter(({ breed }) => regSearch.test(breed));
+
+    return data;
+  }
+
+  sort(condition, data) { 
+
     switch (condition) {
       case "Price (high)":
-        return this.filteredData.sort((a, b) => b.price - a.price);
+        return data.sort((a, b) => b.price - a.price);
       case "Price (low)":
-        return this.filteredData.sort((a, b) => a.price - b.price);
+        return data.sort((a, b) => a.price - b.price);
       case "Age (high)":
-        return this.filteredData.sort((a, b) => a.birth_date - b.birth_date);
+        return data.sort((a, b) => a.birth_date - b.birth_date);
       case "Age (low)":
-        return this.filteredData.sort((a, b) => b.birth_date - a.birth_date);
+        return data.sort((a, b) => b.birth_date - a.birth_date);
     }
   }
 }

@@ -20,17 +20,20 @@ export class AnimalController {
   }
 
   handleSearch(str) {
-    const animals = this.model.filter(str, "search");
+
+    const animals = this.model.globalFilter();
     this.view.renderAnimals(animals);
   }
 
   handleFilter(str) {
-    const animals = this.model.filter(str, "filter");
+
+    const animals = this.model.globalFilter();
     this.view.renderAnimals(animals);
   }
 
   handleSort(condition) {
-    const animals = this.model.sort(condition);
+
+    const animals = this.model.globalFilter();
     this.view.renderAnimals(animals);
   }
 }
