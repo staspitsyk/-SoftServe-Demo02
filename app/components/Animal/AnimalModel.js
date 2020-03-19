@@ -8,26 +8,15 @@ export class AnimalModel {
   }
 
   calculateAge(date) {
-    const birthDate = new Date(date).toISOString();
+    const diff = Date.now() - date;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const yearsAge = Math.floor(days / 365);
+    const monthsAge = Math.floor((days % 365) / 30);
+    const daysAge = Math.floor((days % 365) - monthsAge * 30);
 
-    const mdate = birthDate.toString();
-    const yearThen = parseInt(mdate.substring(0, 4), 10);
-    const monthThen = parseInt(mdate.substring(5, 7), 10);
-    const dayThen = parseInt(mdate.substring(8, 10), 10);
-
-    const today = new Date();
-    const birthday = new Date(yearThen, monthThen - 1, dayThen);
-
-    const differenceInMilisecond = today.valueOf() - birthday.valueOf();
-
-    const yearAge = Math.floor(differenceInMilisecond / 31536000000);
-    let dayAge = Math.floor((differenceInMilisecond % 31536000000) / 86400000);
-
-    const monthAge = Math.floor(dayAge / 30);
-
-    dayAge = dayAge % 30;
-
-    return `${yearAge} years ${monthAge} months ${dayAge} days`;
+    return `Age: ${yearsAge < 1 ? "" : yearsAge + " years "}
+                  ${monthsAge < 1 ? "" : monthsAge + " month "}
+                  ${daysAge < 1 ? "" : daysAge + " days"}`;
   }
 
   async getArrOfAnimals() {
@@ -42,15 +31,15 @@ export class AnimalModel {
 
       this.filteredData = this.data.slice();
 
-      const filter = sessionStorage.getItem("filter");
+      // const filter = sessionStorage.getItem("filter");
 
-      if (filter) {
-        const filteredAnimals = this.filter(filter, this.data);
+      // if (filter) {
+      //   const filteredAnimals = this.filter(filter, this.data);
 
-        return filteredAnimals;
-      } else {
-        return this.getPaginationData();
-      }
+      //   return filteredAnimals;
+      // } else {
+      return this.getPaginationData();
+      // }
     } catch (err) {
       console.log(err);
     }
@@ -65,7 +54,7 @@ export class AnimalModel {
     if (search) this.filteredData = this.search(search, this.filteredData);
     if (sort) this.filteredData = this.sort(sort, this.filteredData);
 
-    return this.getPaginationData(this.filteredData);
+    return this.getPaginationData();
   }
 
   filter(str, data) {
