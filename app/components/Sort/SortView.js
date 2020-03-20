@@ -3,13 +3,7 @@ export class SortView {
     this.sortName = document.querySelector(".sort-name");
     this.sortItems = document.querySelector(".sort-items");
     this.sortItems.addEventListener("click", event => {
-      const value = this.getSortValue(event);
-      const newSortName = event.target.innerText;
-      if (!value) {
-        return;
-      }
-      this.reRenderSortName(newSortName);
-      cbSort(value);
+      cbSort(event);
     });
   }
 

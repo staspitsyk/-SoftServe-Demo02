@@ -6,7 +6,11 @@ export class PaginationController {
     this.notify = notify;
   }
 
-  handleClick(value) {
+  handleClick(event) {
+    const value = this.view.getButton(event);
+    if (!value) {
+      return;
+    }
     this.notify("pagination", value);
   }
 }

@@ -14,7 +14,12 @@ export class SearchFilterController {
     this.notify("search", value);
   }
 
-  handleFilter(value) {
+  handleFilter(event) {
+    const value = this.view.getFilterValue(event);
+    if (!value) {
+      return;
+    }
+    this.view.reRenderFilterName(value);
     this.notify("filter", value);
   }
 }

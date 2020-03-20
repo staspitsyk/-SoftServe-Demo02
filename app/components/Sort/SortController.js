@@ -6,7 +6,13 @@ export class SortController {
     this.notify = notify;
   }
 
-  handleSort(value) {
+  handleSort(event) {
+    const value = this.view.getSortValue(event);
+    const newSortName = event.target.innerText;
+    if (!value) {
+      return;
+    }
+    this.view.reRenderSortName(newSortName);
     this.notify("sort", value);
   }
 }
