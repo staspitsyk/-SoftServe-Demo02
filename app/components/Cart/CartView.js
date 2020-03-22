@@ -4,6 +4,7 @@ export class CartView {
     this.badge = document.querySelector(".badge");
     this.totalPrice = document.querySelector(".price");
     this.removeFromCart = removeFromCart;
+    this.notUniqueModal = document.querySelector('.not-unique-modal');
   }
 
   renderAnimals(animals, totalPrice) {
@@ -12,6 +13,8 @@ export class CartView {
       .map(animal => this.renderSingleAnimal(animal))
       .join("");
     this.cart.innerHTML = output;
+
+    this.reRenderOrder();
 
     const removeButtons = this.cart.querySelectorAll(".remove-from-cart");
     removeButtons.forEach(button =>
@@ -35,7 +38,7 @@ export class CartView {
         <td class="w-25">
             <img src="${image}" class="img-fluid rounded" alt="Sheep">
         </td>
-        <td>NUMBER</td> 
+        <td class="cart-counter">NUMBER</td> 
         <td>${species}</td>
         <td>${breed}</td>
         <td>${age}</td>
@@ -47,6 +50,22 @@ export class CartView {
         </td>
       </tr>
     `;
+  }
+
+  reRenderOrder() {
+    const cartRows = document.querySelectorAll(".cart-counter");
+    cartRows.forEach((p, index) =>  p.innerHTML = `${index + 1}`);
+}
+
+  notUniqueNotification(notUnique) {
+    window.scroll(0 ,0);
+    this.notUniqueModal.classList.add('show');
+    this.notUniqueModal.innerHTML = `<h3>Sorry but you can't order ${notUnique.breed} twice</h3>`;
+    const closeBtn = document.createElement('button');
+    closeBtn.innerHTML = 'Close';
+    closeBtn.classList.add('not-unique-modal-btn');
+    closeBtn.addEventListener('click', () => this.notUniqueModal.classList.remove('show'));
+    this.notUniqueModal.append(closeBtn);
   }
 
   getId(event) {

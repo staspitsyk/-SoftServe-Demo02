@@ -6,13 +6,13 @@ export class CartModel {
   addToCart(animal) {
     const isNotUnique = this.checkIfUnique(animal);
     if (isNotUnique) {
-      return this.animals;
+      return [this.animals, animal];
     }
 
     this.animals.push(animal);
     localStorage.setItem("cart", JSON.stringify(this.animals));
 
-    return this.animals;
+    return [this.animals, false];
   }
 
   removeFromCart(id) {

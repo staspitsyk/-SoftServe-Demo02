@@ -19,8 +19,14 @@ export class CartController {
 
   cartAdd(animal) {
     const cart = this.model.addToCart(animal);
+    const notUnique = cart[1];
+
+    if (notUnique) {
+      this.view.notUniqueNotification(notUnique);
+    }
+
     const totalPrice = this.model.calcSum();
-    this.view.renderAnimals(cart, totalPrice);
+    this.view.renderAnimals(cart[0], totalPrice);
   }
 
   cartRemove(event) {
