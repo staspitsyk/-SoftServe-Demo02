@@ -35,6 +35,7 @@ export class CartView {
         <td class="w-25">
             <img src="${image}" class="img-fluid rounded" alt="Sheep">
         </td>
+        <td>NUMBER</td> 
         <td>${species}</td>
         <td>${breed}</td>
         <td>${age}</td>
