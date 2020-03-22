@@ -1,6 +1,7 @@
 export class AnimalView {
-  constructor() {
+  constructor(cbCart) {
     this.container = document.querySelector(".animals-container");
+    this.cbCart = cbCart;
   }
 
   renderAnimals(animals) {
@@ -10,9 +11,11 @@ export class AnimalView {
         ${output}
       </div>
     `;
+
+    this.addListenerOnCartBtns();
   }
 
-  getSingleAnimal({ image, breed, species, gender, age, price }) {
+  getSingleAnimal({ id, image, breed, species, gender, age, price }) {
     return ` 
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
         <div class="card">
@@ -35,11 +38,16 @@ export class AnimalView {
 
             <p class="mb-1"><strong>$${price}</strong></p>
 
-            <button type="button" class="btn btn-indigo btn-rounded btn-sm px-3">Add to cart</button>
+            <button data-id="${id}" type="button" class="btn btn-indigo btn-rounded btn-sm px-3">Add to cart</button>
             <button type="button" class="btn btn-outline-indigo btn-rounded btn-sm px-3 waves-effect">Details</button>
           </div>
         </div>
       </div>
     `;
+  }
+
+  addListenerOnCartBtns() {
+    const buttons = this.container.querySelectorAll(".btn-indigo");
+    buttons.forEach(btn => btn.addEventListener('click', this.cbCart));
   }
 }

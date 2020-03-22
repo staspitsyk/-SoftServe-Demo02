@@ -137,4 +137,25 @@ export class AnimalModel {
     const to = this.paginationPage * this.paginationCount;
     return this.filteredData.slice(from, to);
   }
+
+  getDataById(animalId) {
+    const animal = this.data.filter(({ id }) => id === +animalId)[0];
+    console.log(animal);
+    let orders = localStorage.getItem('orders');
+
+    if (orders) {
+      orders = JSON.parse(orders);
+      orders.push(animal);
+      orders = JSON.stringify(orders);
+      localStorage.setItem('orders', orders);
+    } else {
+      orders = [];
+      orders.push(animal)
+      orders = JSON.stringify(orders);
+      console.log(orders);
+      localStorage.setItem('orders', orders);
+    }
+
+    return animal;
+  }
 }

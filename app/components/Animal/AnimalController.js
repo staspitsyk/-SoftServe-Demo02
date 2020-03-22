@@ -2,12 +2,13 @@ import { AnimalModel } from "./AnimalModel.js";
 import { AnimalView } from "./AnimalView.js";
 
 export class AnimalController {
-  constructor({ subscribe }) {
+  constructor({ subscribe, notify }) {
     this.model = new AnimalModel();
-    this.view = new AnimalView();
+    this.view = new AnimalView(this.handleAddToCartClick.bind(this));
     this.handleLoadAnimals();
 
     this.subscribe = subscribe;
+    this.notify = notify;
     this.subscribe("search", this.handleSearch.bind(this));
     this.subscribe("filter", this.handleFilter.bind(this));
     this.subscribe("sort", this.handleSort.bind(this));
@@ -38,5 +39,11 @@ export class AnimalController {
   handlePagination(whereTo = "next") {
     const animals = this.model.getPaginationData(whereTo);
     this.view.renderAnimals(animals);
+  }
+
+  handleAddToCartClick(event) {
+    const id =  event.target.dataset.id;
+    const animal = this.model.getDataById(id);
+    this.notify("addToCart", animal);
   }
 }
