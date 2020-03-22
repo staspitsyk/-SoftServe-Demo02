@@ -1,6 +1,7 @@
 export class AnimalView {
-  constructor() {
+  constructor(getCardInfo) {
     this.container = document.querySelector(".animals-container");
+    this.getCardInfo = getCardInfo;
   }
 
   renderAnimals(animals) {
@@ -10,9 +11,13 @@ export class AnimalView {
         ${output}
       </div>
     `;
+    const buttons = this.container.querySelectorAll(".get-card");
+    buttons.forEach(button =>
+      button.addEventListener("click", this.getCardInfo)
+    );
   }
 
-  getSingleAnimal({ image, breed, species, gender, age, price }) {
+  getSingleAnimal({ id, image, breed, species, gender, age, price }) {
     return ` 
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
         <div class="card">
@@ -35,11 +40,15 @@ export class AnimalView {
 
             <p class="mb-1"><strong>$${price}</strong></p>
 
-            <button type="button" class="btn btn-indigo btn-rounded btn-sm px-3">Add to cart</button>
-            <button type="button" class="btn btn-outline-indigo btn-rounded btn-sm px-3 waves-effect">Details</button>
+            <button type="button" data-id=${id} class="get-card btn btn-indigo btn-rounded btn-sm px-3">Add to cart</button>
+            <button type="button" data-id=${id} class="btn btn-outline-indigo btn-rounded btn-sm px-3 waves-effect">Details</button>
           </div>
         </div>
       </div>
     `;
+  }
+
+  getId(event) {
+    return event.target.dataset.id;
   }
 }

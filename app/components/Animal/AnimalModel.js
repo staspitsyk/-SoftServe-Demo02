@@ -30,18 +30,16 @@ export class AnimalModel {
 
       this.filteredData = this.data.slice();
 
-        return this.getPaginationData();
-
+      return this.getPaginationData();
     } catch (err) {
       console.log(err);
     }
   }
 
   globalFilter(options) {
+    if (options.filter) this.fitered = options.filter;
 
-    if (options.filter)  this.fitered = options.filter;
-
-    if (options.search || options.search === '') this.searched = options.search;
+    if (options.search || options.search === "") this.searched = options.search;
 
     if (options.sort) this.sorted = options.sort;
 
@@ -86,9 +84,7 @@ export class AnimalModel {
   search(str, data) {
     const regSearch = new RegExp(str, "i");
 
-    data = data.filter(({
-      breed
-    }) => regSearch.test(breed));
+    data = data.filter(({ breed }) => regSearch.test(breed));
 
     return data;
   }
@@ -136,5 +132,9 @@ export class AnimalModel {
     const from = (this.paginationPage - 1) * this.paginationCount;
     const to = this.paginationPage * this.paginationCount;
     return this.filteredData.slice(from, to);
+  }
+
+  getSingleAnimalData(id) {
+    return this.filteredData.find(animal => animal.id === parseInt(id));
   }
 }
