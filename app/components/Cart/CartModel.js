@@ -4,6 +4,11 @@ export class CartModel {
   }
 
   addToCart(animal) {
+    const isNotUnique = this.checkIfUnique(animal);
+    if (isNotUnique) {
+      return this.animals;
+    }
+
     this.animals.push(animal);
     localStorage.setItem("cart", JSON.stringify(this.animals));
 
@@ -17,6 +22,10 @@ export class CartModel {
     localStorage.setItem("cart", JSON.stringify(this.animals));
 
     return this.animals;
+  }
+
+  checkIfUnique(animal) {
+    return this.animals.some(item => animal === item);
   }
 
   calcSum() {

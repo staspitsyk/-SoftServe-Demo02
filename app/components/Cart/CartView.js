@@ -33,7 +33,7 @@ export class CartView {
     return `
       <tr  class='text-capitalize'>
         <td class="w-25">
-            <img src="${image}" class="img-fluid img-thumbnail" alt="Sheep">
+            <img src="${image}" class="img-fluid rounded" alt="Sheep">
         </td>
         <td>${species}</td>
         <td>${breed}</td>
