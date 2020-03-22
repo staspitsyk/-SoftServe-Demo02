@@ -81,12 +81,11 @@
               <a data-id="age-high" class="dropdown-item" href="#"
                 >&#9660;Age</a
               >
-              <a data-id="age-low" class="dropdown-item" href="#"
-                >&#9650;Age</a
-              >
+              <a data-id="age-low" class="dropdown-item" href="#">&#9650;Age</a>
             </div>
           </div>
           <!-- Dropdown -->
+          
           <!-- Dropdown -->
           <div class="nav-item dropdown navbar-nav">
             <a
@@ -121,21 +120,27 @@
             </div>
           </form>
           <div class="nav-item nav-flex-icons navbar-nav">
-            <a href="#!" data-toggle="modal" data-target="#basicExampleModal" class="nav-link waves-effect active">
-              <span class="badge red z-depth-1 mr-1"> 0 </span>
-                <i
-                  id="navbar-static-cart"
-                  alt="Cart"
-                  class="fas fa-shopping-cart"
-                ></i>
-              <span class="sr-only"> Cart </span></a>
+            <a
+              href="#!"
+              data-toggle="modal"
+              data-target="#basicExampleModal"
+              class="nav-link waves-effect active"
+            >
+              <span class="badge red z-depth-1 mr-1"></span>
+              <i
+                id="navbar-static-cart"
+                alt="Cart"
+                class="fas fa-shopping-cart"
+              ></i>
+              <span class="sr-only"> Cart </span></a
+            >
           </div>
         </div>
         <!-- Collapsible content -->
       </nav>
     </header>
 
-<!-- Modal -->
+    <!-- Modal -->
     <div
       class="modal fade"
       id="basicExampleModal"
@@ -144,10 +149,13 @@
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog" role="document">
+      <div
+        class="modal-dialog modal-lg modal-dialog-scrollable"
+        role="document"
+      >
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Your Cart</h5>
             <button
               type="button"
               class="close"
@@ -158,7 +166,25 @@
             </button>
           </div>
           <div class="modal-body">
-            ...
+            <table class="table table-image">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Number</th>
+                  <th scope="col">Species</th>
+                  <th scope="col">Breed</th>
+                  <th scope="col">Age</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="animals-in-cart">
+                <!-- PRODUCTS LIST HERE -->
+              </tbody>
+            </table>
+            <div class="d-flex justify-content-end">
+              <h5>Total: <span class="price text-success">0$</span></h5>
+            </div>
           </div>
           <div class="modal-footer">
             <button
