@@ -15,8 +15,8 @@ export class AnimalController {
     this.subscribe("pagination", this.handlePagination.bind(this));
   }
 
-  handleAnimalInfo(ev) {
-    const id = this.view.getId(ev);
+  handleAnimalInfo(event) {
+    const id = this.view.getId(event);
     const animal = this.model.getSingleAnimalData(id);
     this.notify("get-single-animal", animal);
   }

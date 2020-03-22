@@ -5,8 +5,16 @@ export class CartController {
   constructor({ subscribe }) {
     this.model = new CartModel();
     this.view = new CartView(this.cartRemove.bind(this));
+    this.cartShow();
+
     this.subscribe = subscribe;
     this.subscribe("get-single-animal", this.cartAdd.bind(this));
+  }
+
+  cartShow() {
+    const cart = this.model.animals;
+    const totalPrice = this.model.calcSum();
+    this.view.renderAnimals(cart, totalPrice);
   }
 
   cartAdd(animal) {

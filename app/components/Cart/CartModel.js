@@ -1,11 +1,12 @@
 export class CartModel {
   constructor() {
-    this.animals = [];
+    this.animals = JSON.parse(localStorage.getItem("cart")) || [];
   }
 
   addToCart(animal) {
     this.animals.push(animal);
-    // console.log(this.animals);
+    localStorage.setItem("cart", JSON.stringify(this.animals));
+
     return this.animals;
   }
 
@@ -13,6 +14,8 @@ export class CartModel {
     this.animals = this.animals.filter(animal => {
       return animal.id !== parseInt(id);
     });
+    localStorage.setItem("cart", JSON.stringify(this.animals));
+
     return this.animals;
   }
 
