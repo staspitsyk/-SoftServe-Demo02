@@ -11,8 +11,8 @@ export class AnimalView {
         ${output}
       </div>
     `;
-    const buttons = this.container.querySelectorAll(".get-card");
-    buttons.forEach(button =>
+    const cartButtons = this.container.querySelectorAll(".add-to-cart");
+    cartButtons.forEach(button =>
       button.addEventListener("click", this.getCardInfo)
     );
   }
@@ -40,7 +40,7 @@ export class AnimalView {
 
             <p class="mb-1"><strong>$${price}</strong></p>
 
-            <button type="button" data-id=${id} class="get-card btn btn-indigo btn-rounded btn-sm px-3">Add to cart</button>
+            <button type="button" data-id=${id} class="add-to-cart btn btn-indigo btn-rounded btn-sm px-3">Add to cart</button>
             <button type="button" data-id=${id} class="btn btn-outline-indigo btn-rounded btn-sm px-3 waves-effect">Details</button>
           </div>
         </div>
