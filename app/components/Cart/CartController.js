@@ -3,11 +3,14 @@ import { CartModel } from "./CartModel.js";
 
 export class CartController {
   constructor({ subscribe }) {
+    this.model = new CartModel();
+    this.view = new CartView();
     this.subscribe = subscribe;
-    this.subscribe("get-single-animal", this.addToCart);
+    this.subscribe("get-single-animal", this.cartHandle.bind(this));
   }
 
-  addToCart(animal) {
-    console.log("Cart Controller", animal);
+  cartHandle(animal) {
+    const cart = this.model.addToCart(animal);
+    this.view.renderAnimals(cart);
   }
 }

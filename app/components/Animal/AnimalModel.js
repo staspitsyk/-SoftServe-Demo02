@@ -13,9 +13,9 @@ export class AnimalModel {
     const monthsAge = Math.floor((days % 365) / 30);
     const daysAge = Math.floor((days % 365) - monthsAge * 30);
 
-    return `Age: ${yearsAge < 1 ? "" : yearsAge + " years "}
-                  ${monthsAge < 1 ? "" : monthsAge + " month "}
-                  ${daysAge < 1 ? "" : daysAge + " days"}`;
+    return `${yearsAge < 1 ? "" : yearsAge + " years "}
+            ${monthsAge < 1 ? "" : monthsAge + " month "}
+            ${daysAge < 1 ? "" : daysAge + " days"}`;
   }
 
   async getArrOfAnimals() {
