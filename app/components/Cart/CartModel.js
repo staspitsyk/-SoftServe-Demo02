@@ -25,7 +25,7 @@ export class CartModel {
   }
 
   checkIfUnique(animal) {
-    return this.animals.some(item => animal === item);
+    return this.animals.some(item => animal.id === item.id);
   }
 
   calcSum() {

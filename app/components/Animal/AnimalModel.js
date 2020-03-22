@@ -24,10 +24,9 @@ export class AnimalModel {
 
       this.data = await response.json();
 
-      this.data.forEach(animals => {
-        animals.age = this.calculateAge(animals.birth_date);
-        animals.isBought = false;
-      });
+      this.data.forEach(
+        animals => (animals.age = this.calculateAge(animals.birth_date))
+      );
 
       this.filteredData = this.data.slice();
 

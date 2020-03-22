@@ -50,6 +50,6 @@ export class CartView {
 
   getId(event) {
     const id = event.target.dataset.id;
-    return id ? id : event.target.closest("a").dataset.id;
+    return id ? id : event.target.closest(".remove-from-cart").dataset.id;
   }
 }
