@@ -60,7 +60,7 @@ export class CartView {
   notUniqueNotification(notUnique) {
     window.scroll(0 ,0);
     this.notUniqueModal.classList.add('show');
-    this.notUniqueModal.innerHTML = `<h3>Sorry but you can't order ${notUnique.breed} twice</h3>`;
+    this.notUniqueModal.innerHTML = `<h3>Sorry but you can't order <span class="not-unique-animal">${notUnique.breed}</span> twice</h3>`;
     const closeBtn = document.createElement('button');
     closeBtn.innerHTML = 'Close';
     closeBtn.classList.add('not-unique-modal-btn');

@@ -2,9 +2,7 @@ export class SortView {
   constructor(cbSort) {
     this.sortName = document.querySelector(".sort-name");
     this.sortItems = document.querySelector(".sort-items");
-    this.sortItems.addEventListener("click", event => {
-      cbSort(event);
-    });
+    this.sortItems.addEventListener("click", cbSort);
   }
 
   getSortValue(event) {

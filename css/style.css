@@ -2,14 +2,6 @@
     height: 244px;
 }
 
-/* .not-unique-modal-container {
-    z-index: 1;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-
-} */
-
 .not-unique-modal {
     display: none;
     z-index: 2;
@@ -44,6 +36,10 @@
 
 .not-unique-modal-btn:hover {
     background-color: #393737;
+}
+
+.not-unique-animal {
+    font-weight: 900;
 }
 
 .show {

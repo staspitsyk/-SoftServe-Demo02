@@ -4,9 +4,7 @@ export class SearchFilterView {
     this.input = document.querySelector(".form-control");
     this.input.addEventListener("input", cbSearch);
     this.filterItems = document.querySelector(".filter-items");
-    this.filterItems.addEventListener("click", event => {
-      cbFilter(event);
-    });
+    this.filterItems.addEventListener("click", cbFilter);
   }
 
   getFilterValue(event) {

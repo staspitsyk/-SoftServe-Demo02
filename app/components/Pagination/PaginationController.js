@@ -7,6 +7,7 @@ export class PaginationController {
   }
 
   handleClick(event) {
+    window.scroll(0 ,0);
     const value = this.view.getButton(event);
     if (!value) {
       return;
