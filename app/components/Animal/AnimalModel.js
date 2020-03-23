@@ -37,6 +37,7 @@ export class AnimalModel {
   }
 
   globalFilter(options) {
+    options.filter = options.filter || 'all';
     if (options.filter) this.fitered = options.filter;
 
     if (options.search || options.search === "") this.searched = options.search;
