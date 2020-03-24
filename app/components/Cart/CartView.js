@@ -11,6 +11,7 @@ export class CartView {
   }
 
   renderAnimals(animals, totalPrice) {
+    this.disableButton(animals.length);
     this.renderBadge(animals.length);
     const output = animals
       .map((animal, index) => {
@@ -70,6 +71,14 @@ export class CartView {
       this.notUniqueModal.classList.remove("show")
     );
     this.notUniqueModal.append(closeBtn);
+  }
+
+  disableButton(isNotEmpty) {
+    if (isNotEmpty) {
+      this.makeOrderBtn.disabled = false;
+    } else {
+      this.makeOrderBtn.disabled = true;
+    }
   }
 
   getId(event) {
