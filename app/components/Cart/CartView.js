@@ -1,10 +1,13 @@
 export class CartView {
-  constructor(removeFromCart) {
+  constructor(removeFromCart, handleOrder) {
     this.cart = document.querySelector(".animals-in-cart");
     this.badge = document.querySelector(".badge");
     this.totalPrice = document.querySelector(".price");
-    this.removeFromCart = removeFromCart;
+    this.makeOrderBtn = document.querySelector(".make-order");
     this.notUniqueModal = document.querySelector(".not-unique-modal");
+    this.removeFromCart = removeFromCart;
+    this.handleOrder = handleOrder;
+    this.makeOrderBtn.addEventListener("click", this.handleOrder);
   }
 
   renderAnimals(animals, totalPrice) {
