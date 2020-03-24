@@ -123,7 +123,7 @@
             <a
               href="#!"
               data-toggle="modal"
-              data-target="#basicExampleModal"
+              data-target="#cart-modal"
               class="nav-link waves-effect active"
             >
               <span class="badge red z-depth-1 mr-1"></span>
@@ -140,10 +140,10 @@
       </nav>
     </header>
 
-    <!-- Modal -->
+    <!-- Cart Modal -->
     <div
       class="modal fade"
-      id="basicExampleModal"
+      id="cart-modal"
       tabindex="-1"
       role="dialog"
       aria-labelledby="exampleModalLabel"
@@ -199,7 +199,49 @@
         </div>
       </div>
     </div>
-    <!-- Modal -->
+    <!-- Cart Modal -->
+
+    <!-- Details Modal -->
+    <div
+      class="modal fade"
+      id="details-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="detailsLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-md modal-dialog-scrollable"
+        role="document"
+      >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Details</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="details-body modal-body">
+            <!-- Details Here -->
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-indigo"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Details Modal -->
 
     <main class="container mt-5">
       <section class="dark-grey-text text-center">

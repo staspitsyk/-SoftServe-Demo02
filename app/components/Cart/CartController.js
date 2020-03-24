@@ -8,7 +8,7 @@ export class CartController {
     this.cartShow();
 
     this.subscribe = subscribe;
-    this.subscribe("get-single-animal", this.cartAdd.bind(this));
+    this.subscribe("get-cart", this.cartAdd.bind(this));
   }
 
   cartShow() {

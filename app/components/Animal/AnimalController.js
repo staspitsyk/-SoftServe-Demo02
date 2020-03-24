@@ -4,7 +4,10 @@ import { AnimalView } from "./AnimalView.js";
 export class AnimalController {
   constructor({ subscribe, notify }) {
     this.model = new AnimalModel();
-    this.view = new AnimalView(this.handleAnimalInfo.bind(this));
+    this.view = new AnimalView(
+      this.handleCart.bind(this),
+      this.handleDetails.bind(this)
+    );
     this.handleLoadAnimals();
 
     this.notify = notify;
@@ -15,10 +18,16 @@ export class AnimalController {
     this.subscribe("pagination", this.handlePagination.bind(this));
   }
 
-  handleAnimalInfo(event) {
+  handleCart(event) {
     const id = this.view.getId(event);
     const animal = this.model.getSingleAnimalData(id);
-    this.notify("get-single-animal", animal);
+    this.notify("get-cart", animal);
+  }
+
+  handleDetails(event) {
+    const id = this.view.getId(event);
+    const animal = this.model.getSingleAnimalData(id);
+    this.notify("get-details", animal);
   }
 
   handleLoadAnimals() {
