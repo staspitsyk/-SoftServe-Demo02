@@ -25,7 +25,7 @@
     <header>
       <nav class="container navbar navbar-expand-lg navbar-dark indigo">
         <!-- Navbar brand -->
-        <a class="navbar-brand" href="#">Navbar</a>
+        <span class="navbar-brand" href="#">PetShop</span>
 
         <!-- Collapse button -->
         <button
@@ -51,10 +51,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
+              <a class="orders nav-link" href="#">Orders</a>
             </li>
           </ul>
           <!-- Links -->
@@ -85,7 +82,7 @@
             </div>
           </div>
           <!-- Dropdown -->
-          
+
           <!-- Dropdown -->
           <div class="nav-item dropdown navbar-nav">
             <a
@@ -123,7 +120,7 @@
             <a
               href="#!"
               data-toggle="modal"
-              data-target="#basicExampleModal"
+              data-target="#cart-modal"
               class="nav-link waves-effect active"
             >
               <span class="badge red z-depth-1 mr-1"></span>
@@ -140,10 +137,10 @@
       </nav>
     </header>
 
-    <!-- Modal -->
+    <!-- Cart Modal -->
     <div
       class="modal fade"
-      id="basicExampleModal"
+      id="cart-modal"
       tabindex="-1"
       role="dialog"
       aria-labelledby="exampleModalLabel"
@@ -186,20 +183,140 @@
               <h5>Total: <span class="price text-success">0$</span></h5>
             </div>
           </div>
-          <div class="modal-footer">
+          <div class="modal-footer justify-content-center">
+            <button type="button" class="btn btn-warning" data-dismiss="modal">
+              <i class="fas fa-arrow-left"></i><span> Continue Shoping</span>
+            </button>
             <button
               type="button"
-              class="btn btn-secondary"
               data-dismiss="modal"
+              data-toggle="modal"
+              data-target="#order-form-modal"
+              class="make-order btn btn-success"
+              disabled
             >
-              Close
+              <span>Purchase </span><i class="fas fa-angle-right"></i>
             </button>
-            <button type="button" class="btn btn-indigo">Save changes</button>
           </div>
         </div>
       </div>
     </div>
-    <!-- Modal -->
+    <!-- Cart Modal -->
+
+    <!-- Order Form Modal -->
+    <div
+      class="modal fade"
+      id="order-form-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">Order Form</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form name="order-form">
+            <div class="modal-body mx-3">
+              <div class="md-form mb-5">
+                <i class="fas fa-user prefix grey-text"></i>
+                <input
+                  name="user-name"
+                  class="form-control"
+                  placeholder="Your Name"
+                />
+                <span class="name-err red-text">
+                  <!-- Error Here -->
+                </span>
+              </div>
+
+              <div class="md-form mb-5">
+                <i class="fas fa-phone prefix grey-text"></i>
+                <input
+                  name="user-phone"
+                  class="form-control"
+                  placeholder="Your Phone Number"
+                />
+                <span class="phone-err red-text">
+                  <!-- Error Here -->
+                </span>
+              </div>
+
+              <div class="md-form mb-5">
+                <i class="fas fa-envelope prefix grey-text"></i>
+                <input
+                  name="user-email"
+                  class="form-control"
+                  placeholder="Your email"
+                />
+                <span class="email-err red-text">
+                  <!-- Error Here -->
+                </span>
+              </div>
+            </div>
+          </form>
+          <div class="modal-footer d-flex justify-content-center">
+            <button
+              data-dismiss="modal"
+              data-toggle="modal"
+              class="purchase-btn btn btn-success"
+              disabled
+            >
+              Purchase
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Order Form Modal -->
+
+    <!-- Details Modal -->
+    <div
+      class="modal fade"
+      id="details-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="detailsLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-md modal-dialog-scrollable"
+        role="document"
+      >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Details</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="details-body modal-body">
+            <!-- Details Here -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-indigo" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Details Modal -->
 
     <main class="container mt-5">
       <section class="dark-grey-text text-center">

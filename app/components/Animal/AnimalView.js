@@ -1,7 +1,8 @@
 export class AnimalView {
-  constructor(getCardInfo) {
+  constructor(getCart, getDetails) {
     this.container = document.querySelector(".animals-container");
-    this.getCardInfo = getCardInfo;
+    this.getCart = getCart;
+    this.getDetails = getDetails;
   }
 
   renderAnimals(animals) {
@@ -11,10 +12,23 @@ export class AnimalView {
         ${output}
       </div>
     `;
+    this.addToCartListener();
+    this.detailsListener();
+  }
+
+  addToCartListener() {
     const cartButtons = this.container.querySelectorAll(".add-to-cart");
     cartButtons.forEach(button =>
-      button.addEventListener("click", this.getCardInfo)
+      button.addEventListener("click", this.getCart)
     );
+  }
+
+  detailsListener() {
+    const detailsButton = this.container.querySelectorAll(".details");
+
+    detailsButton.forEach(button => {
+      button.addEventListener("click", this.getDetails);
+    });
   }
 
   getSingleAnimal({ id, image, breed, species, gender, age, price }) {
@@ -25,7 +39,7 @@ export class AnimalView {
             <img src="${image}" class="card-img-top animal__image"
               alt="A ${species}">
             <a>
-              <div class="mask rgba-white-slight"></div>
+              <div data-id=${id} data-toggle="modal" data-target="#details-modal" class="details mask rgba-white-slight"></div>
             </a>
           </div>
 
@@ -41,7 +55,8 @@ export class AnimalView {
             <p class="mb-1"><strong>$${price}</strong></p>
 
             <button type="button" data-id=${id} class="add-to-cart btn btn-indigo btn-rounded btn-sm px-3">Add to cart</button>
-            <button type="button" data-id=${id} class="btn btn-outline-indigo btn-rounded btn-sm px-3 waves-effect">Details</button>
+            <button type="button" data-id=${id} data-toggle="modal" data-target="#details-modal" class="details btn btn-outline-indigo btn-rounded btn-sm px-3 waves-effect">Details</button>
+              
           </div>
         </div>
       </div>

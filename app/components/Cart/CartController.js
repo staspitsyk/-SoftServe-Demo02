@@ -2,13 +2,17 @@ import { CartView } from "./CartView.js";
 import { CartModel } from "./CartModel.js";
 
 export class CartController {
-  constructor({ subscribe }) {
+  constructor({ subscribe, notify }) {
     this.model = new CartModel();
-    this.view = new CartView(this.cartRemove.bind(this));
+    this.view = new CartView(
+      this.cartRemove.bind(this),
+      this.handleOrder.bind(this)
+    );
     this.cartShow();
 
+    this.notify = notify;
     this.subscribe = subscribe;
-    this.subscribe("get-single-animal", this.cartAdd.bind(this));
+    this.subscribe("get-cart", this.cartAdd.bind(this));
   }
 
   cartShow() {
@@ -34,5 +38,11 @@ export class CartController {
     const cart = this.model.removeFromCart(id);
     const totalPrice = this.model.calcSum();
     this.view.renderAnimals(cart, totalPrice);
+  }
+
+  handleOrder() {
+    const cart = this.model.animals;
+    const totalPrice = this.model.calcSum();
+    this.notify("get-order", { cart, totalPrice });
   }
 }
