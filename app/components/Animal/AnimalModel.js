@@ -4,6 +4,7 @@ export class AnimalModel {
     this.data = [];
     this.paginationCount = 9;
     this.paginationPage = 1;
+    this.fitered = 'all';
   }
 
   calculateAge(date) {
@@ -37,7 +38,6 @@ export class AnimalModel {
   }
 
   globalFilter(options) {
-    options.filter = options.filter || 'all';
     if (options.filter) this.fitered = options.filter;
 
     if (options.search || options.search === "") this.searched = options.search;

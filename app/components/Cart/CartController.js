@@ -22,15 +22,14 @@ export class CartController {
   }
 
   cartAdd(animal) {
-    const cart = this.model.addToCart(animal);
-    const notUnique = cart[1];
+    const { animals, isNotUnique } = this.model.addToCart(animal);
 
-    if (notUnique) {
-      this.view.notUniqueNotification(notUnique);
+    if (isNotUnique) {
+      this.view.notUniqueNotification(animal);
+    } else {
+      const totalPrice = this.model.calcSum();
+      this.view.renderAnimals(animals, totalPrice);
     }
-
-    const totalPrice = this.model.calcSum();
-    this.view.renderAnimals(cart[0], totalPrice);
   }
 
   cartRemove(event) {

@@ -5,6 +5,9 @@ export class CartView {
     this.totalPrice = document.querySelector(".price");
     this.makeOrderBtn = document.querySelector(".make-order");
     this.notUniqueModal = document.querySelector(".not-unique-modal");
+    this.notUniqueAnimal = document.querySelector(".not-unique-animal");
+    this.notUniqueButton = document.querySelector(".not-unique-modal-btn");
+    this.notUniqueButton.addEventListener("click", this.hideNotUniqueModal.bind(this));
     this.removeFromCart = removeFromCart;
     this.handleOrder = handleOrder;
     this.makeOrderBtn.addEventListener("click", this.handleOrder);
@@ -61,16 +64,12 @@ export class CartView {
   }
 
   notUniqueNotification(notUnique) {
-    window.scroll(0, 0);
     this.notUniqueModal.classList.add("show");
-    this.notUniqueModal.innerHTML = `<h3>Sorry but you can't order <span class="not-unique-animal">${notUnique.breed}</span> twice</h3>`;
-    const closeBtn = document.createElement("button");
-    closeBtn.innerHTML = "Close";
-    closeBtn.classList.add("not-unique-modal-btn");
-    closeBtn.addEventListener("click", () =>
-      this.notUniqueModal.classList.remove("show")
-    );
-    this.notUniqueModal.append(closeBtn);
+    this.notUniqueAnimal.innerHTML = notUnique.breed;
+  }
+
+  hideNotUniqueModal() {
+    this.notUniqueModal.classList.remove("show");
   }
 
   disableButton(isNotEmpty) {
