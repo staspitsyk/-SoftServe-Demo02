@@ -2,21 +2,24 @@ import { OrderFormView } from "./OrderFormView.js";
 import { OrderFormModel } from "./OrderFormModel.js";
 
 export class OrderFormController {
-  constructor({ subscribe }) {
+  constructor({ subscribe, notify }) {
     this.model = new OrderFormModel();
     this.view = new OrderFormView(
       this.handleName.bind(this),
       this.handlePhone.bind(this),
-      this.handleEmail.bind(this)
+      this.handleEmail.bind(this),
+      this.handleOrder.bind(this)
     );
 
+    this.notify = notify;
     this.subscribe = subscribe;
     this.subscribe("get-order", this.getCartInfo.bind(this));
 
     // this.handlers = {
     //   handleName: this.handleName.bind(this),
     //   handlePhone: this.handlePhone.bind(this),
-    //   handleEmail: this.handleEmail.bind(this)
+    //   handleEmail: this.handleEmail.bind(this),
+    //   handleOrder: this.handleOrder.bind(this)
     // };
   }
 
@@ -68,5 +71,16 @@ export class OrderFormController {
     this.checkAllFields();
   }
 
-  handleOrder() {}
+  handleOrder() {
+    const order = {
+      name: this.view.getName(),
+      phone: this.view.getPhone(),
+      email: this.view.getEmail(),
+      products: this.cartInfo.cart,
+      totalPrice: this.cartInfo.totalPrice
+    };
+
+    this.model.setToLocalStorage(order);
+    this.notify("orders-history", this.model.ordersHistory);
+  }
 }

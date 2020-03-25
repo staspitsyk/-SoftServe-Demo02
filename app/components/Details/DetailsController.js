@@ -8,7 +8,6 @@ export class DetailsController {
   }
 
   showDetails(animal) {
-    console.log(animal);
     this.view.renderAnimal(animal);
   }
 }

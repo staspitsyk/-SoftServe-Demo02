@@ -1,5 +1,5 @@
 export class OrderFormView {
-  constructor(handleName, handlePhone, handleEmail) {
+  constructor(handleName, handlePhone, handleEmail, handleOrder) {
     this.form = document.forms["order-form"];
     this.name = this.form["user-name"];
     this.phone = this.form["user-phone"];
@@ -11,7 +11,7 @@ export class OrderFormView {
     this.name.addEventListener("input", handleName);
     this.phone.addEventListener("input", handlePhone);
     this.email.addEventListener("input", handleEmail);
-    this.purchaseBtn.addEventListener("click", handleEmail);
+    this.purchaseBtn.addEventListener("click", handleOrder);
   }
 
   disableButton(isDisabled) {
