@@ -6,6 +6,7 @@ import { PaginationController } from "./components/Pagination/PaginationControll
 import { CartController } from "./components/Cart/CartController.js";
 import { DetailsController } from "./components/Details/DetailsController.js";
 import { OrderFormController } from "./components/OrderForm/OrderFormController.js";
+import { OrderDetailsController } from "./components/OrderDetails/OrderDetailsController.js";
 
 const publisher = new Publisher();
 const animal = new AnimalController(publisher.methods);
@@ -15,3 +16,4 @@ const pagination = new PaginationController(publisher.methods);
 const cart = new CartController(publisher.methods);
 const details = new DetailsController(publisher.methods);
 const orderFrom = new OrderFormController(publisher.methods);
+const orderDetails = new OrderDetailsController(publisher.methods);

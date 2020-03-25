@@ -43,6 +43,6 @@ export class CartController {
   handleOrder() {
     const cart = this.model.animals;
     const totalPrice = this.model.calcSum();
-    this.notify("get-order", { cart, totalPrice });
+    this.notify("get-order", { amountOfProducts: cart.length, totalPrice });
   }
 }

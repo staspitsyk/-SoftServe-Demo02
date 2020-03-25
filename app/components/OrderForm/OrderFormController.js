@@ -76,7 +76,7 @@ export class OrderFormController {
       name: this.view.getName(),
       phone: this.view.getPhone(),
       email: this.view.getEmail(),
-      products: this.cartInfo.cart,
+      amountOfProducts: this.cartInfo.amountOfProducts,
       totalPrice: this.cartInfo.totalPrice
     };
 
