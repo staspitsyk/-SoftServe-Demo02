@@ -4,30 +4,69 @@ import { OrderFormModel } from "./OrderFormModel.js";
 export class OrderFormController {
   constructor({ subscribe }) {
     this.model = new OrderFormModel();
-    this.view = new OrderFormView(this.handleOrder.bind(this));
+    this.view = new OrderFormView(
+      this.handleName.bind(this),
+      this.handlePhone.bind(this),
+      this.handleEmail.bind(this)
+    );
 
     this.subscribe = subscribe;
     this.subscribe("get-order", this.getCartInfo.bind(this));
+
+    // this.handlers = {
+    //   handleName: this.handleName.bind(this),
+    //   handlePhone: this.handlePhone.bind(this),
+    //   handleEmail: this.handleEmail.bind(this)
+    // };
+  }
+
+  checkAllFields() {
+    const values = this.model.getValidType();
+    for (let key in values) {
+      if (!values[key]) {
+        this.view.disableButton(true);
+        return;
+      }
+    }
+    this.view.disableButton(false);
   }
 
   getCartInfo(cart) {
     this.cartInfo = cart;
   }
 
-  handleOrder() {
-    const inputValues = this.view.getInputValues();
-    const errors = this.model.validateValues(inputValues);
-    if (errors.length) {
-      this.view.renderErrorMsgs(errors);
-      console.log(errors);
+  handleName() {
+    const name = this.view.getName();
+    const error = this.model.validateName(name);
+    if (error) {
+      this.view.renderError(error, ".name-err");
     } else {
-      console.log({
-        name: inputValues.name,
-        phone: inputValues.phone,
-        email: inputValues.email,
-        totalPrice: this.cartInfo.totalPrice,
-        products: this.cartInfo.cart
-      });
+      this.view.renderError("", ".name-err");
     }
+    this.checkAllFields();
   }
+
+  handlePhone() {
+    const phone = this.view.getPhone();
+    const error = this.model.validatePhone(phone);
+    if (error) {
+      this.view.renderError(error, ".phone-err");
+    } else {
+      this.view.renderError("", ".phone-err");
+    }
+    this.checkAllFields();
+  }
+
+  handleEmail() {
+    const email = this.view.getEmail();
+    const error = this.model.validateEmail(email);
+    if (error) {
+      this.view.renderError(error, ".email-err");
+    } else {
+      this.view.renderError("", ".email-err");
+    }
+    this.checkAllFields();
+  }
+
+  handleOrder() {}
 }

@@ -239,7 +239,11 @@
                   class="form-control"
                   placeholder="Your Name"
                 />
+                <span class='name-err red-text'>
+                  <!-- Error Here -->
+                </span>
               </div>
+
 
               <div class="md-form mb-5">
                 <i class="fas fa-phone prefix grey-text"></i>
@@ -248,6 +252,9 @@
                   class="form-control"
                   placeholder="Your Phone Number"
                 />
+                <span class='phone-err red-text'>
+                  <!-- Error Here -->
+                </span>
               </div>
 
               <div class="md-form mb-5">
@@ -257,39 +264,15 @@
                   class="form-control"
                   placeholder="Your email"
                 />
+                <span class='email-err red-text'>
+                  <!-- Error Here -->
+                </span>
               </div>
 
             </div>
           </form>
-
-          <!-- <div class="modal-body mx-3">
-            <div class="md-form mb-5">
-              <i class="fas fa-user prefix grey-text"></i>
-              <input
-                class="form-control validate"
-                placeholder="Your Name"
-              />
-            </div>
-
-            <div class="md-form mb-4">
-              <i class="fas fa-phone prefix grey-text"></i>
-              <input
-                class="form-control validate"
-                placeholder="Your Phone Number"
-              />
-            </div>
-
-            <div class="md-form mb-5">
-              <i class="fas fa-envelope prefix grey-text"></i>
-              <input
-                class="form-control validate"
-                placeholder="Your email"
-              />
-            </div>
-
-          </div> -->
           <div class="modal-footer d-flex justify-content-center">
-            <button class="purchase-btn btn btn-success">Purchase</button>
+            <button class="purchase-btn btn btn-success" disabled>Purchase</button>
           </div>
         </div>
       </div>

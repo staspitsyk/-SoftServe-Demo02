@@ -1,22 +1,49 @@
 export class OrderFormModel {
-  constructor() {}
+  constructor() {
+    this.isValid = {
+      name: false,
+      phone: false,
+      email: false
+    };
+  }
 
-  validateValues(inputValues) {
-    const errors = [];
+  getValidType() {
+    return this.isValid;
+  }
+
+  validateName(name) {
     const nameRegExp = new RegExp(/^[A-Z][a-z]+$/);
+    const error = "Invalid name";
+    if (!nameRegExp.test(name)) {
+      this.isValid.name = false;
+      return error;
+    } else {
+      this.isValid.name = true;
+    }
+  }
+
+  validatePhone(phone) {
     const phoneRegExp = new RegExp(/^\+380\d+$/);
-    const emailRegExp = new RegExp(/^\w.+@\w+.\w+$/i);
+    const error = "Invalid phone";
+    if (!phoneRegExp.test(phone)) {
+      this.isValid.phone = false;
+      return error;
+    } else {
+      this.isValid.phone = true;
+    }
+  }
 
-    if (!nameRegExp.test(inputValues.name)) {
-      errors.push("Invalid Name");
+  validateEmail(email) {
+    // const emailRegExp = new RegExp(/^\w.+@\w+.\w+$/i);
+    const emailRegExp = new RegExp(
+      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/i
+    );
+    const error = "Invalid name";
+    if (!emailRegExp.test(email)) {
+      this.isValid.email = false;
+      return error;
+    } else {
+      this.isValid.email = true;
     }
-    if (!phoneRegExp.test(inputValues.phone)) {
-      errors.push("Invalid Phone Number");
-    }
-    if (!emailRegExp.test(inputValues.email)) {
-      errors.push("Invalid Email");
-    }
-
-    return errors;
   }
 }

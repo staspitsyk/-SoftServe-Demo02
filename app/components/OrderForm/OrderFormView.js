@@ -1,28 +1,36 @@
 export class OrderFormView {
-  constructor(handleOrder) {
+  constructor(handleName, handlePhone, handleEmail) {
     this.form = document.forms["order-form"];
     this.name = this.form["user-name"];
     this.phone = this.form["user-phone"];
     this.email = this.form["user-email"];
-    this.errorMsgs = document.querySelector(".error-messages");
 
-    this.handleOrder = handleOrder;
+    this.errorMsgs = document.querySelector(".error-messages");
     this.purchaseBtn = document.querySelector(".purchase-btn");
 
-    // this.name.addEventListener("input", this.handleOrder);
-    this.purchaseBtn.addEventListener("click", this.handleOrder);
+    this.name.addEventListener("input", handleName);
+    this.phone.addEventListener("input", handlePhone);
+    this.email.addEventListener("input", handleEmail);
+    this.purchaseBtn.addEventListener("click", handleEmail);
   }
 
-  renderErrorMsgs(messages) {
-    const output = messages.join("\n");
-    this.errorMsgs.innerHTML = `<pre class='font-weight-bold red-text text-center'>${output}</pre>`;
+  disableButton(isDisabled) {
+    this.purchaseBtn.disabled = isDisabled;
   }
 
-  getInputValues() {
-    return {
-      name: this.name.value,
-      phone: this.phone.value,
-      email: this.email.value
-    };
+  renderError(msg, className) {
+    document.querySelector(className).innerText = msg;
+  }
+
+  getName() {
+    return this.name.value;
+  }
+
+  getPhone() {
+    return this.phone.value;
+  }
+
+  getEmail() {
+    return this.email.value;
   }
 }
