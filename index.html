@@ -51,7 +51,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="orders nav-link" href="#">Orders</a>
+              <a
+                data-toggle="modal"
+                data-target="#orders-history-modal"
+                class="orders nav-link"
+                href="#"
+                >Orders</a
+              >
             </li>
           </ul>
           <!-- Links -->
@@ -317,6 +323,71 @@
       </div>
     </div>
     <!-- Details Modal -->
+
+    <!-- Order Details Modal -->
+    <div
+      class="modal fade"
+      id="orders-history-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-lg modal-dialog-scrollable"
+        role="document"
+      >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr class='text-center'>
+                  <th>#</th>
+                  <th>Customer</th>
+                  <th>Amount of Products</th>
+                  <th>Order Date</th>
+                  <th>Net Amount</th>
+                </tr>
+              </thead>
+              <tbody class='text-center'>
+                <tr>
+                  <td>1</td>
+                  <td>Michael Holz</td>
+                  <td>4</td>
+                  <td>Jun 15, 2017</td>
+                  <td>$254</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Paula Wilson</td>
+                  <td>2</td>
+                  <td>Jun 21, 2017</td>
+                  <td>$1,260</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button type="button" class="btn btn-indigo" data-dismiss="modal">
+               Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Order Details Modal -->
 
     <main class="container mt-5">
       <section class="dark-grey-text text-center">
