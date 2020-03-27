@@ -16,4 +16,6 @@ app.get('/', (req, res) => {
 
 app.use('/products', require('./modules/pets/pets.routes'));
 
+app.use('/orders', require('./modules/orders/orders.routes'));
+
 app.listen(3000, () => console.log('Server is started'));
