@@ -2,9 +2,9 @@ const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../../db');
 
 
-class Products extends Model {}
+class Pets extends Model {}
 
-const ProductsModel = Products.init({
+const PetsModel = Pets.init({
     id: { type: DataTypes.INTEGER, primaryKey: true, allowNull: false, autoIncrement: true},
     species: { type: DataTypes.STRING, allowNull: true },
     price: { type: DataTypes.FLOAT, allowNull: true },
@@ -19,4 +19,4 @@ const ProductsModel = Products.init({
     description: { type: DataTypes.STRING(1000), allowNull: true }
 }, { sequelize });
 
-module.exports = ProductsModel;
+module.exports = PetsModel;

@@ -3,7 +3,7 @@
 let data = require('../data/data');
 
 data = data.map(obj => {
-  obj = {
+  return {
     species: obj.species,
     price: obj.price,
     gender: obj.gender,
@@ -14,7 +14,7 @@ data = data.map(obj => {
     image: `public/img/image_${obj.id}.jpg`,
     is_sterile: obj.is_sterile,
     hair: obj.hair,
-    description: 'dummy text',
+    description: obj.description,
     createdAt: new Date(),
     updatedAt: new Date(),
   }
@@ -22,10 +22,9 @@ data = data.map(obj => {
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Products', data);
+    return queryInterface.bulkInsert('Pets', data);
 },
   down: (queryInterface, Sequelize) => {
-
-      return queryInterface.bulkDelete('Products', null, {});
+      return queryInterface.bulkDelete('Pets', null, {});
   }
 };
