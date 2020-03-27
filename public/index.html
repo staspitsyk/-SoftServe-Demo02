@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Zulu Animal Shop</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/mdb.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <header>
+      <nav class="container navbar navbar-expand-lg navbar-dark indigo">
+        <!-- Navbar brand -->
+        <span class="navbar-brand" href="#">PetShop</span>
+
+        <!-- Collapse button -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#basicExampleNav"
+          aria-controls="basicExampleNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="./index.html"
+                >Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="orders nav-link" href="#">Orders</a>
+            </li>
+          </ul>
+          <!-- Links -->
+          <!-- Dropdown -->
+          <div class="nav-item dropdown navbar-nav">
+            <a
+              class="sort-name nav-link dropdown-toggle nav-item active"
+              id="navbarDropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              >Sort By</a
+            >
+            <div
+              class="sort-items dropdown-menu dropdown-primary"
+              aria-labelledby="navbarDropdownMenuLink"
+            >
+              <a data-id="price-high" class="dropdown-item" href="#"
+                >&#9660;Price</a
+              >
+              <a data-id="price-low" class="dropdown-item" href="#"
+                >&#9650;Price</a
+              >
+              <a data-id="age-high" class="dropdown-item" href="#"
+                >&#9660;Age</a
+              >
+              <a data-id="age-low" class="dropdown-item" href="#">&#9650;Age</a>
+            </div>
+          </div>
+          <!-- Dropdown -->
+
+          <!-- Dropdown -->
+          <div class="nav-item dropdown navbar-nav">
+            <a
+              class="filter-name nav-link dropdown-toggle nav-item active"
+              id="navbarDropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              >Filter</a
+            >
+            <div
+              class="filter-items dropdown-menu dropdown-primary"
+              aria-labelledby="navbarDropdownMenuLink"
+            >
+              <a data-id="all" class="dropdown-item" href="#">All</a>
+              <a data-id="cat" class="dropdown-item" href="#">Cat</a>
+              <a data-id="dog" class="dropdown-item" href="#">Dog</a>
+              <a data-id="bird" class="dropdown-item" href="#">Bird</a>
+              <a data-id="fish" class="dropdown-item" href="#">Fish</a>
+              <a data-id="other" class="dropdown-item" href="#">Other</a>
+            </div>
+          </div>
+          <!-- Dropdown -->
+          <form class="form-inline">
+            <div class="md-form my-0">
+              <input
+                class="form-control mr-sm-2"
+                type="text"
+                placeholder="Search"
+                aria-label="Search"
+              />
+            </div>
+          </form>
+          <div class="nav-item nav-flex-icons navbar-nav">
+            <a
+              href="#!"
+              data-toggle="modal"
+              data-target="#cart-modal"
+              class="nav-link waves-effect active"
+            >
+              <span class="badge red z-depth-1 mr-1"></span>
+              <i
+                id="navbar-static-cart"
+                alt="Cart"
+                class="fas fa-shopping-cart"
+              ></i>
+              <span class="sr-only"> Cart </span></a
+            >
+          </div>
+        </div>
+        <!-- Collapsible content -->
+      </nav>
+    </header>
+
+    <!-- Cart Modal -->
+    <div
+      class="modal fade"
+      id="cart-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-lg modal-dialog-scrollable"
+        role="document"
+      >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Your Cart</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-image">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Number</th>
+                  <th scope="col">Species</th>
+                  <th scope="col">Breed</th>
+                  <th scope="col">Age</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="animals-in-cart">
+                <!-- PRODUCTS LIST HERE -->
+              </tbody>
+            </table>
+            <div class="d-flex justify-content-end">
+              <h5>Total: <span class="price text-success">0$</span></h5>
+            </div>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button type="button" class="btn btn-warning" data-dismiss="modal">
+              <i class="fas fa-arrow-left"></i><span> Continue Shoping</span>
+            </button>
+            <button
+              type="button"
+              data-dismiss="modal"
+              data-toggle="modal"
+              data-target="#order-form-modal"
+              class="make-order btn btn-success"
+              disabled
+            >
+              <span>Purchase </span><i class="fas fa-angle-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Cart Modal -->
+
+    <!-- Order Form Modal -->
+    <div
+      class="modal fade"
+      id="order-form-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">Order Form</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form name="order-form">
+            <div class="modal-body mx-3">
+              <div class="md-form mb-5">
+                <i class="fas fa-user prefix grey-text"></i>
+                <input
+                  name="user-name"
+                  class="form-control"
+                  placeholder="Your Name"
+                />
+                <span class="name-err red-text">
+                  <!-- Error Here -->
+                </span>
+              </div>
+
+              <div class="md-form mb-5">
+                <i class="fas fa-phone prefix grey-text"></i>
+                <input
+                  name="user-phone"
+                  class="form-control"
+                  placeholder="Your Phone Number"
+                />
+                <span class="phone-err red-text">
+                  <!-- Error Here -->
+                </span>
+              </div>
+
+              <div class="md-form mb-5">
+                <i class="fas fa-envelope prefix grey-text"></i>
+                <input
+                  name="user-email"
+                  class="form-control"
+                  placeholder="Your email"
+                />
+                <span class="email-err red-text">
+                  <!-- Error Here -->
+                </span>
+              </div>
+            </div>
+          </form>
+          <div class="modal-footer d-flex justify-content-center">
+            <button
+              data-dismiss="modal"
+              data-toggle="modal"
+              class="purchase-btn btn btn-success"
+              disabled
+            >
+              Purchase
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Order Form Modal -->
+
+    <!-- Details Modal -->
+    <div
+      class="modal fade"
+      id="details-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="detailsLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-md modal-dialog-scrollable"
+        role="document"
+      >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Details</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="details-body modal-body">
+            <!-- Details Here -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-indigo" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Details Modal -->
+
+    <main class="container mt-5">
+      <section class="dark-grey-text text-center">
+        <h3 class="font-weight-bold mb-4 pb-2">Our Pets</h3>
+        <div class="not-unique-modal">
+          <h3>Sorry but you can't order <span class="not-unique-animal"></span> twice</h3>
+          <button class="not-unique-modal-btn">Close</button>
+        </div>
+        <div class="animals-container">
+          <!-- Spinner -->
+          <div class="d-flex justify-content-center mb-4">
+            <div class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+          <!-- Spinner -->
+        </div>
+        <!-- Pagination content -->
+        <div class="row justify-content-center">
+          <nav aria-label="Page navigation example">
+            <ul class="pag-btns pagination pg-blue">
+              <li class="page-item">
+                <a data-id="previous" class="page-link">Previous</a>
+              </li>
+              <li class="page-item">
+                <a data-id="next" class="page-link">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <!-- Pagination content -->
+      </section>
+    </main>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/mdb.min.js"></script>
+    <script src="app/main.js" type="module"></script>
+  </body>
+</html>
