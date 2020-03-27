@@ -4,7 +4,7 @@ class OrdersController {
 
     async createOne(req, res, next) {
         try {
-            const order = await ordersService.createOne(req.order, req.body);
+            const order = await ordersService.createOne(req.body);
             res.json(order);
         } catch (e) {
             next(e);

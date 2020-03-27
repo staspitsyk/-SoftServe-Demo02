@@ -2,9 +2,8 @@ OrdersModel = require('./orders.model');
 
 class OrdersService {
 
-    async createOne(order, orderData) {
+    async createOne(orderData) {
         const ordersModel = new OrdersModel(orderData);
-        ordersModel.OrderId = order.id;
         return ordersModel.save();
     }
 }

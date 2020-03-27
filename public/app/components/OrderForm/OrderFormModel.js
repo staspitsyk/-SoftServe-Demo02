@@ -51,4 +51,20 @@ export class OrderFormModel {
     this.ordersHistory.push(order);
     localStorage.setItem("orders", JSON.stringify(this.ordersHistory));
   }
+
+  async postOrder(order) {
+    const url = 'http://127.0.0.1:3000/orders';
+
+    try {
+      await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(order), 
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

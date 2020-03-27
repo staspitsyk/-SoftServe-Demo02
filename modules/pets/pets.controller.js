@@ -23,23 +23,6 @@ class PetsController {
         }
     }
 
-    async createMany(req, res, next) {
-        try {
-            fs.readFile(path.join(__dirname, '../..', 'data/data.json'), 'utf8', (err, content) => {
-                if (err) {
-                    throw err;
-                }
-                content = JSON.parse(content);
-                content.forEach(async animal => {
-                    animal.image = `public/img/image_${animal.id}.jpg`;
-                    const oneAnimal = await petsService.createOne(animal);
-                });
-            });
-        } catch (e) {
-            next(e);
-        }
-    }
-
     async removeOne(req, res, next) {
         try {
             const result = await usersService.removeOne(req.params.id);

@@ -79,6 +79,7 @@ export class OrderFormController {
       products: this.cartInfo.amountOfProducts,
       totalPrice: this.cartInfo.totalPrice
     };
+    this.model.postOrder(order);
 
     this.model.setToLocalStorage(order);
     this.notify("orders-history", this.model.ordersHistory);
