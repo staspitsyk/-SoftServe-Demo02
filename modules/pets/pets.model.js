@@ -1,5 +1,6 @@
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../../db');
+const OrderItemModel = require('../orders/order-item.model');
 
 class Pets extends Model {}
 
@@ -25,6 +26,8 @@ const PetsModel = Pets.init(
   },
   { sequelize }
 );
+
+PetsModel.item = PetsModel.hasOne(OrderItemModel)
 
 module.exports = PetsModel;
 
