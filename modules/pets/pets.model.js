@@ -28,13 +28,3 @@ const PetsModel = Pets.init(
 
 module.exports = PetsModel;
 
-// species: { type: DataTypes.STRING(50), allowNull: false },
-// price: { type: DataTypes.REAL, allowNull: false },
-// gender: { type: DataTypes.STRING(15), allowNull: false },
-// weight: { type: DataTypes.REAL, allowNull: false },
-// birth_date: { type: DataTypes.BIGINT, allowNull: false },
-// color: { type: DataTypes.STRING(50), allowNull: false },
-// breed: { type: DataTypes.STRING(50), allowNull: false },
-// image: { type: DataTypes.STRING(100), allowNull: false },
-// description: { type: DataTypes.TEXT, allowNull: false },
-

@@ -5,5 +5,6 @@ const router = new Router();
 
 router.get('/', PetsController.findMany);
 
-module.exports = router;
+router.get('/:id', PetsController.findPetById);
 
+module.exports = router;
