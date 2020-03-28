@@ -11,6 +11,8 @@ const db_data = data.map(pet => {
     image: `./public/img/image_${pet.id}.jpg`,
     birth_date: pet.birth_date,
     description: pet.description,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   }
 });
 
