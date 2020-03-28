@@ -1,5 +1,7 @@
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../../db');
+const PetModel = require('../pets/pets.model');
+// const OrderItemModel = require('../orders/order-item.model');
 
 
 class Pets extends Model {}
@@ -18,5 +20,7 @@ const PetsModel = Pets.init({
     hair: { type: DataTypes.STRING, allowNull: true },
     description: { type: DataTypes.STRING(1000), allowNull: true }
 }, { sequelize });
+
+// PetsModel.items = PetsModel.hasMany(OrderItemModel);
 
 module.exports = PetsModel;

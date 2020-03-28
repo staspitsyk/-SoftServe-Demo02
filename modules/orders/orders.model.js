@@ -1,6 +1,8 @@
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../../db');
-const OrderItemModel = require('./order-item.model');
+const PetModel = require('../pets/pets.model');
+// const OrderItemModel  = require('./order-item.model');
+
 
 class Orders extends Model {}
 
@@ -13,6 +15,18 @@ const OrdersModel = Orders.init({
     totalPrice: { type: DataTypes.DECIMAL, allowNull: false },
 }, { sequelize });
 
-// OrdersModel.items = OrdersModel.hasMany(OrderItemModel);
+class OrderItems extends Model {}
 
-module.exports = OrdersModel;
+const OrderItemModel = OrderItems.init({
+
+}, { sequelize });
+
+OrderItemModel.order = OrderItemModel.belongsTo(OrdersModel, { foreignKeyConstraint: true, foreignKey: 'orderId', targetKey: 'id' });
+OrderItemModel.pet = OrderItemModel.belongsTo(PetModel, { foreignKeyConstraint: true, foreignKey: 'petId', targetKey: 'id' });
+
+OrdersModel.items = OrdersModel.hasMany(OrderItemModel);
+
+module.exports = {
+    OrdersModel,
+    OrderItemModel,
+};

@@ -77,7 +77,8 @@ export class OrderFormController {
       phone: this.view.getPhone(),
       email: this.view.getEmail(),
       products: this.cartInfo.amountOfProducts,
-      totalPrice: this.cartInfo.totalPrice
+      totalPrice: this.cartInfo.totalPrice,
+      aniamlIds: [1, 5, 17],
     };
     this.model.postOrder(order);
 
