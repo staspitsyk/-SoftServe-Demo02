@@ -1,15 +1,15 @@
-const petsService = require('./pets.service');
+const PetsService = require('./pets.service');
 
 class PetsController {
   async findMany(req, res, next) {
     try {
-      const pets = await petsService.findMany();
-      res.json(users);
+      const pets = await PetsService.findMany();
+      res.json(pets);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 }
 
 const petsController = new PetsController();
-module.exports = petsController
+module.exports = petsController;

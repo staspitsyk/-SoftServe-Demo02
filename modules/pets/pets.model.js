@@ -1,38 +1,40 @@
-// const { DataTypes, Model } = require('sequelize');
-// const sequelize = require('../../db');
-//
-// class Pets extends Model {}
-//
-// const PetsModel = Pets.init(
-//   {
-//     id: {
-//       allowNull: false,
-//       autoIncrement: true,
-//       primaryKey: true,
-//       type: DataTypes.INTEGER,
-//     },
-//     species: { type: DataTypes.STRING(50), allowNull: false },
-//     price: { type: DataTypes.REAL, allowNull: false },
-//     gender: { type: DataTypes.STRING(15), allowNull: false },
-//     weight: { type: DataTypes.REAL, allowNull: false },
-//     birth_date: { type: DataTypes.BIGINT, allowNull: false },
-//     color: { type: DataTypes.STRING(50), allowNull: false },
-//     breed: { type: DataTypes.STRING(50), allowNull: false },
-//     image: { type: DataTypes.STRING(100), allowNull: false },
-//     description: { type: DataTypes.TEXT, allowNull: false },
-//
-//     // id: {type: DataTypes.INTEGER, primaryKey: true, allowNull: false},
-//     // species: {type: DataTypes.STRING, allowNull: false},
-//     // price: {type: DataTypes.REAL, allowNull: false},
-//     // gender: {type: DataTypes.STRING, allowNull: false},
-//     // weight: {type: DataTypes.REAL, allowNull: false},
-//     // color: {type: DataTypes.STRING, allowNull: false},
-//     // breed: {type: DataTypes.STRING, allowNull: false},
-//     // image: {type: DataTypes.STRING, allowNull: false},
-//     // birth_date: {type: DataTypes.DATE, allowNull: false},
-//     // description: {type: DataTypes.STRING, allowNull: false},
-//   },
-//   { sequelize }
-// );
-//
-// module.exports = PetsModel;
+const { DataTypes, Model } = require('sequelize');
+const sequelize = require('../../db');
+
+class Pets extends Model {}
+
+const PetsModel = Pets.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    species: {type: DataTypes.STRING, allowNull: true},
+    price: {type: DataTypes.FLOAT, allowNull: true},
+    gender: {type: DataTypes.STRING, allowNull: true},
+    weight: {type: DataTypes.FLOAT, allowNull: true},
+    birth_date: {type: DataTypes.BIGINT, allowNull: true},
+    color: {type: DataTypes.STRING, allowNull: true},
+    breed: {type: DataTypes.STRING, allowNull: true},
+    image: {type: DataTypes.STRING, allowNull: true},
+    // is_sterile: {type: DataTypes.BOOLEAN, allowNull: true},
+    // hair: {type: DataTypes.STRING, allowNull: true},
+    description: {type: DataTypes.STRING(1000), allowNull: true},
+  },
+  { sequelize }
+);
+
+module.exports = PetsModel;
+
+// species: { type: DataTypes.STRING(50), allowNull: false },
+// price: { type: DataTypes.REAL, allowNull: false },
+// gender: { type: DataTypes.STRING(15), allowNull: false },
+// weight: { type: DataTypes.REAL, allowNull: false },
+// birth_date: { type: DataTypes.BIGINT, allowNull: false },
+// color: { type: DataTypes.STRING(50), allowNull: false },
+// breed: { type: DataTypes.STRING(50), allowNull: false },
+// image: { type: DataTypes.STRING(100), allowNull: false },
+// description: { type: DataTypes.TEXT, allowNull: false },
+

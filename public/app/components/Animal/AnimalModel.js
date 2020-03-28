@@ -1,6 +1,6 @@
 export class AnimalModel {
   constructor() {
-    this.link = "public/data/data.json";
+    this.link = "http://localhost:3000/pets";
     this.data = [];
     this.paginationCount = 9;
     this.paginationPage = 1;
