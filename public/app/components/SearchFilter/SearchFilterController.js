@@ -1,11 +1,13 @@
 import { SearchFilterView } from "./SearchFilterView.js";
 
 export class SearchFilterController {
-  constructor({ notify }) {
+  constructor({ notify }, builder) {
     this.view = new SearchFilterView(
       this.handleSearch.bind(this),
       this.handleFilter.bind(this)
     );
+
+    this.builder = builder;
     this.notify = notify;
   }
 
@@ -20,6 +22,7 @@ export class SearchFilterController {
       return;
     }
     this.view.reRenderFilterName(value);
+
     this.notify("filter", value);
   }
 }

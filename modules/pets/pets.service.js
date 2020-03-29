@@ -15,26 +15,31 @@ class PetsService {
     return pet;
   }
 
-  async createOne(animalData) {
-    const existingAnimal = await PetsModel.findOne({
-      where: { id: animalData.id }
-    });
-
-    if (existingAnimal) {
-      console.log("already exist");
-      return;
-    }
-
-    const petsModel = new PetsModel(animalData);
-    const savedProduct = await productModel.save();
-    return savedProduct;
+  async getAmount() {
+    const amount = await PetsModel.count();
+    return amount;
   }
 
-  async removeOne(id) {
-    const pet = await this.findOneById(id);
-    pet.destroy();
-    return { id: pet.id };
-  }
+  // async createOne(animalData) {
+  //   const existingAnimal = await PetsModel.findOne({
+  //     where: { id: animalData.id }
+  //   });
+
+  //   if (existingAnimal) {
+  //     console.log("already exist");
+  //     return;
+  //   }
+
+  //   const petsModel = new PetsModel(animalData);
+  //   const savedProduct = await productModel.save();
+  //   return savedProduct;
+  // }
+
+  // async removeOne(id) {
+  //   const pet = await this.findOneById(id);
+  //   pet.destroy();
+  //   return { id: pet.id };
+  // }
 }
 
 module.exports = new PetsService();

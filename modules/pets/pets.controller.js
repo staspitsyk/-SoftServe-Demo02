@@ -13,26 +13,26 @@ class PetsController {
       const where = {};
 
       const fullRequest = {
-        limit: parseInt(specificReq.limit) || 9,
+        limit: parseInt(specificReq.limit) || 50,
         offset: parseInt(specificReq.offset) || 0
       };
 
       // resolving query string for Sort
       if (specificReq.sortType) {
         switch (specificReq.sortType) {
-          case "priceUp": {
+          case "priceLow": {
             order.push(["price", "ASC"]);
             break;
           }
-          case "priceDown": {
+          case "priceHigh": {
             order.push(["price", "DESC"]);
             break;
           }
-          case "ageUp": {
+          case "ageHigh": {
             order.push(["birth_date", "ASC"]);
             break;
           }
-          case "ageDown": {
+          case "ageLow": {
             order.push(["birth_date", "DESC"]);
             break;
           }
@@ -47,14 +47,18 @@ class PetsController {
       }
 
       // resolving query string for Search
-      if (specificReq.searchString) {
+      if (specificReq.search) {
         where.breed = {
-          [Op.like]: `%${specificReq.searchString}%`
+          [Op.like]: `%${specificReq.search}%`
         };
         fullRequest.where = where;
       }
 
-      const pets = await petsService.findMany(fullRequest);
+      const pets = {
+        total: await petsService.getAmount(),
+        pets: await petsService.findMany(fullRequest)
+      };
+
       res.json(pets);
     } catch (e) {
       next(e);

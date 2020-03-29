@@ -4,7 +4,11 @@ export class AnimalModel {
     this.data = [];
     // this.paginationCount = 9;
     // this.paginationPage = 1;
-    this.fitered = "all";
+    this.pageOffset = 0;
+  }
+
+  getLink(queryString) {
+    return `${this.link}${queryString}`;
   }
 
   calculateAge(date) {
@@ -19,90 +23,48 @@ export class AnimalModel {
             ${daysAge < 1 ? "" : daysAge + " days"}`;
   }
 
-  async getArrOfAnimals() {
+  async getArrOfAnimals(link = this.link) {
     try {
-      const response = await fetch(this.link);
+      const response = await fetch(link);
 
       this.data = await response.json();
 
-      this.data.forEach(
+      this.data.pets.forEach(
         animals => (animals.age = this.calculateAge(animals.birth_date))
       );
 
-      this.filteredData = this.data.slice();
-
-      return this.data;
-      // return this.getPaginationData();
+      return this.data.pets;
     } catch (err) {
       console.log(err);
     }
   }
 
-  globalFilter(options) {
-    if (options.filter) this.fitered = options.filter;
+  // paginatePage(whereTo) {
+  //   const limit = 9;
+  //   console.log("MAX:", this.data.total);
+  //   switch (whereTo) {
+  //     case "next": {
+  //       this.pageOffset += limit;
+  //       if (this.pageOffset < this.data.total) {
+  //         return this.pageOffset;
+  //       } else {
+  //         this.pageOffset = 0;
+  //       }
+  //       break;
+  //     }
+  //     case "previous": {
+  //       this.pageOffset -= limit;
+  //       if (this.pageOffset < 0) {
+  //         this.pageOffset = this.data.total - limit;
+  //       } else {
+  //         return this.pageOffset;
+  //       }
 
-    if (options.search || options.search === "") this.searched = options.search;
-
-    if (options.sort) this.sorted = options.sort;
-
-    if (this.fitered) {
-      this.filteredData = this.filter(this.fitered, this.data);
-    }
-
-    if (this.searched) {
-      this.filteredData = this.search(this.searched, this.filteredData);
-    }
-
-    if (this.sorted) {
-      this.filteredData = this.sort(this.sorted, this.filteredData);
-    }
-
-    return this.getPaginationData();
-  }
-
-  filter(str, data) {
-    const regSearch = new RegExp(str, "i");
-
-    if (str === "all") {
-      return data;
-    }
-
-    if (str === "other") {
-      data = data.filter(
-        ({ species }) =>
-          species !== "dog" &&
-          species !== "cat" &&
-          species !== "fish" &&
-          species !== "bird"
-      );
-      return data;
-    }
-
-    data = data.filter(({ species }) => regSearch.test(species));
-
-    return data;
-  }
-
-  search(str, data) {
-    const regSearch = new RegExp(str, "i");
-
-    data = data.filter(({ breed }) => regSearch.test(breed));
-
-    return data;
-  }
-
-  sort(condition, data) {
-    switch (condition) {
-      case "price-high":
-        return data.sort((a, b) => b.price - a.price);
-      case "price-low":
-        return data.sort((a, b) => a.price - b.price);
-      case "age-high":
-        return data.sort((a, b) => a.birth_date - b.birth_date);
-      case "age-low":
-        return data.sort((a, b) => b.birth_date - a.birth_date);
-    }
-  }
+  //       break;
+  //     }
+  //   }
+  //   return this.pageOffset;
+  // }
 
   getPaginationData(whereTo) {
     switch (whereTo) {
@@ -137,6 +99,6 @@ export class AnimalModel {
   }
 
   getSingleAnimalData(id) {
-    return this.filteredData.find(animal => animal.id === parseInt(id));
+    return this.data.pets.find(animal => animal.id === parseInt(id));
   }
 }
