@@ -1,6 +1,5 @@
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../../db');
-const PetModel = require('../pets/pets.model');
 // const OrderItemModel = require('../orders/order-item.model');
 
 

@@ -1,6 +1,6 @@
 export class AnimalModel {
   constructor() {
-    this.link = `http://127.0.0.1:3000/products`;
+    this.link = `http://127.0.0.1:3000/pets`;
     this.data = [];
     this.paginationCount = 9;
     this.paginationPage = 1;
