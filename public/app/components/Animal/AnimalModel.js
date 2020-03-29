@@ -2,9 +2,9 @@ export class AnimalModel {
   constructor() {
     this.link = `http://127.0.0.1:3000/pets`;
     this.data = [];
-    this.paginationCount = 9;
-    this.paginationPage = 1;
-    this.fitered = 'all';
+    // this.paginationCount = 9;
+    // this.paginationPage = 1;
+    this.fitered = "all";
   }
 
   calculateAge(date) {
@@ -31,7 +31,8 @@ export class AnimalModel {
 
       this.filteredData = this.data.slice();
 
-      return this.getPaginationData();
+      return this.data;
+      // return this.getPaginationData();
     } catch (err) {
       console.log(err);
     }

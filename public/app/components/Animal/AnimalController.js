@@ -15,7 +15,7 @@ export class AnimalController {
     this.subscribe("search", this.handleSearch.bind(this));
     this.subscribe("filter", this.handleFilter.bind(this));
     this.subscribe("sort", this.handleSort.bind(this));
-    this.subscribe("pagination", this.handlePagination.bind(this));
+    // this.subscribe("pagination", this.handlePagination.bind(this));
   }
 
   handleCart(event) {
@@ -51,8 +51,8 @@ export class AnimalController {
     this.view.renderAnimals(animals);
   }
 
-  handlePagination(whereTo = "next") {
-    const animals = this.model.getPaginationData(whereTo);
-    this.view.renderAnimals(animals);
-  }
+  // handlePagination(whereTo = "next") {
+  //   const animals = this.model.getPaginationData(whereTo);
+  //   this.view.renderAnimals(animals);
+  // }
 }

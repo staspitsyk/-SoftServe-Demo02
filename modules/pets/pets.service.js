@@ -1,42 +1,40 @@
-const PetsModel = require('./pets.model');
+const PetsModel = require("./pets.model");
 
 class PetsService {
+  async findMany(findType) {
+    return PetsModel.findAll(findType);
+  }
 
-    async findMany() {
-        return PetsModel.findAll();
+  async findOneById(id) {
+    const pet = await PetsModel.findOne({ where: { id } });
+
+    if (!pet) {
+      console.log("Pet not found");
     }
 
-    async findOneById(id) {
-        const pet = await PetsModel.findOne({ where: { id } });
+    return pet;
+  }
 
-        if (!pet) {
-            console.log('Pet not found');
-        }
+  async createOne(animalData) {
+    const existingAnimal = await PetsModel.findOne({
+      where: { id: animalData.id }
+    });
 
-        return pet;
+    if (existingAnimal) {
+      console.log("already exist");
+      return;
     }
 
-    async createOne(animalData) {
-        const existingAnimal = await PetsModel.findOne({
-            where: { id: animalData.id }
-        });
+    const petsModel = new PetsModel(animalData);
+    const savedProduct = await productModel.save();
+    return savedProduct;
+  }
 
-        if (existingAnimal) {
-            console.log('already exist');
-            return;
-        }
-
-        const petsModel = new PetsModel(animalData);
-        const savedProduct = await productModel.save();
-        return savedProduct;
-    }
-
-    async removeOne(id) {
-        const pet = await this.findOneById(id);
-        pet.destroy();
-        return { id: pet.id };
-    }
-
+  async removeOne(id) {
+    const pet = await this.findOneById(id);
+    pet.destroy();
+    return { id: pet.id };
+  }
 }
 
 module.exports = new PetsService();
