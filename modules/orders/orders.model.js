@@ -9,4 +9,6 @@ const OrdersModel = Orders.init({
   postedDate: { allowNull: false, type: DataTypes.DATE }
 }, { sequelize });
 
-// OrdersModel.items = OrdersModel.hasMany(OrderItemModel);
+OrdersModel.items = OrdersModel.hasMany(OrderItemModel);
+
+module.exports = OrdersModel;

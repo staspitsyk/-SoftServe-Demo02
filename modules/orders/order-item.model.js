@@ -5,7 +5,14 @@ const OrdersModel = require('../orders/orders.model.js');
 
 class OrderItem extends Model {}
 
-const OrderItemModel = OrderItem.init();
+const OrderItemModel = OrderItem.init({
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+  },
+});
 
 OrderItemModel.pets = OrderItemModel.belongsTo(PetsModel, {
   foreignKeyConstraint: true,
@@ -18,3 +25,5 @@ OrderItemModel.order = OrderItemModel.belongsTo(OrdersModel, {
   foreignKey: 'orderId',
   targetKey: 'id',
 });
+
+module.exports = OrderItemModel;
