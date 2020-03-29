@@ -1,6 +1,7 @@
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../../db');
-const PetModel = require('../pets/pets.model');
+const PetsModel = require('../pets/pets.model');
+const OrderItemModel = require('./orders.item-model');
 
 class Orders extends Model {}
 
@@ -11,21 +12,13 @@ const OrdersModel = Orders.init({
     email: { type: DataTypes.STRING, allowNull: false },
     products: { type: DataTypes.DECIMAL, allowNull: false },
     totalPrice: { type: DataTypes.DECIMAL, allowNull: false },
-    // date: { type: DataTypes.DATE, allowNull: false },
-}, { sequelize });
-
-class OrderItems extends Model {}
-
-const OrderItemModel = OrderItems.init({
-
+    date: { type: DataTypes.DATE, allowNull: false },
 }, { sequelize });
 
 OrderItemModel.order = OrderItemModel.belongsTo(OrdersModel, { foreignKeyConstraint: true, foreignKey: 'orderId', targetKey: 'id' });
-OrderItemModel.pet = OrderItemModel.belongsTo(PetModel, { foreignKeyConstraint: true, foreignKey: 'petId', targetKey: 'id' });
+OrderItemModel.pet = OrderItemModel.belongsTo(PetsModel, { foreignKeyConstraint: true, foreignKey: 'petId', targetKey: 'id' });
 
 OrdersModel.items = OrdersModel.hasMany(OrderItemModel);
+PetsModel.items = PetsModel.hasMany(OrderItemModel);
 
-module.exports = {
-    OrdersModel,
-    OrderItemModel,
-};
+module.exports = OrdersModel;

@@ -1,4 +1,7 @@
-const { OrdersModel, OrderItemModel } = require('./orders.model');
+// const { OrdersModel, OrderItemModel } = require('./orders.model');
+const  OrdersModel  = require('./orders.model');
+const  OrderItemModel = require('./orders.item-model');
+
 const sequelize = require('../../db');
 
 class OrdersService {

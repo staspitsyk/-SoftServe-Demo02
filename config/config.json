@@ -1,6 +1,6 @@
 {
   "db": {
-    "name": "petshop",
+    "name": "node-test",
     "user": "postgres",
     "password": "123456",
     "host": "127.0.0.1",
@@ -13,8 +13,8 @@
   },
   "development": {
     "username": "postgres",
-    "password": null,
-    "database": "petshop",
+    "password": "123456",
+    "database": "node-test",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "operatorsAliases": false
