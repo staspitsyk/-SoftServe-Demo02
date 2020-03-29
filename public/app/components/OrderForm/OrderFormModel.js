@@ -54,9 +54,7 @@ export class OrderFormModel {
 
   async postOrder(order) {
     const url = 'http://127.0.0.1:3000/orders';
-    console.log(order);
     const body = JSON.stringify(order);
-    console.log(body);
 
     try {
       await fetch(url, {

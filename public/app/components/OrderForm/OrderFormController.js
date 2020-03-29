@@ -79,7 +79,7 @@ export class OrderFormController {
       products: this.cartInfo.amountOfProducts,
       totalPrice: this.cartInfo.totalPrice,
       date: new Date(),
-      aniamlIds: [1, 5, 17],
+      orderAnimalsIds: this.cartInfo.orderAnimalsIds,
     };
     this.model.postOrder(order);
 
