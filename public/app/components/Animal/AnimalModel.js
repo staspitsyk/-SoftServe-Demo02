@@ -2,9 +2,7 @@ export class AnimalModel {
   constructor() {
     this.link = `http://127.0.0.1:3000/pets`;
     this.data = [];
-    // this.paginationCount = 9;
-    // this.paginationPage = 1;
-    this.pageOffset = 0;
+    this.pageOffset = 9;
   }
 
   getLink(queryString) {
@@ -39,63 +37,26 @@ export class AnimalModel {
     }
   }
 
-  // paginatePage(whereTo) {
-  //   const limit = 9;
-  //   console.log("MAX:", this.data.total);
-  //   switch (whereTo) {
-  //     case "next": {
-  //       this.pageOffset += limit;
-  //       if (this.pageOffset < this.data.total) {
-  //         return this.pageOffset;
-  //       } else {
-  //         this.pageOffset = 0;
-  //       }
-  //       break;
-  //     }
-  //     case "previous": {
-  //       this.pageOffset -= limit;
-  //       if (this.pageOffset < 0) {
-  //         this.pageOffset = this.data.total - limit;
-  //       } else {
-  //         return this.pageOffset;
-  //       }
+  paginate(whereTo, curOffset) {
+    const nextOffset = curOffset + this.pageOffset;
+    const prevOffset = curOffset - this.pageOffset;
 
-  //       break;
-  //     }
-  //   }
-  //   return this.pageOffset;
-  // }
-
-  getPaginationData(whereTo) {
     switch (whereTo) {
       case "next": {
-        if (
-          this.filteredData.length / this.paginationCount >
-          this.paginationPage
-        ) {
-          this.paginationPage++;
+        if (nextOffset >= this.data.total) {
+          return curOffset;
         } else {
-          this.paginationPage = 1;
+          return nextOffset;
         }
-        break;
       }
       case "previous": {
-        if (this.paginationPage === 1) {
-          this.paginationPage = Math.ceil(
-            this.filteredData.length / this.paginationCount
-          );
+        if (prevOffset < 0) {
+          return curOffset;
         } else {
-          this.paginationPage = this.paginationPage - 1;
+          return prevOffset;
         }
-        break;
-      }
-      default: {
-        this.paginationPage = 1;
       }
     }
-    const from = (this.paginationPage - 1) * this.paginationCount;
-    const to = this.paginationPage * this.paginationCount;
-    return this.filteredData.slice(from, to);
   }
 
   getSingleAnimalData(id) {

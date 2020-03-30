@@ -1,15 +1,17 @@
 export class QueryBuilder {
   constructor() {
     this.query = "";
-    this.parameters = {};
+    this.parameters = {
+      offset: 0
+    };
+  }
+
+  getOffset() {
+    return this.parameters.offset;
   }
 
   addParam(paramName, paramValue) {
     this.parameters[paramName] = paramValue;
-  }
-
-  addParamStr(param) {
-    return `&${param}`;
   }
 
   build() {

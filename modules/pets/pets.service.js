@@ -15,8 +15,8 @@ class PetsService {
     return pet;
   }
 
-  async getAmount() {
-    const amount = await PetsModel.count();
+  async getAmount(findType) {
+    const amount = await PetsModel.count(findType);
     return amount;
   }
 

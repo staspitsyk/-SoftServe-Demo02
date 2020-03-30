@@ -40,24 +40,31 @@ export class AnimalController {
 
   handleSearch(value) {
     this.queryBuilder.addParam("search", value);
+    this.queryBuilder.addParam("offset", 0);
     this.makeGETRequest();
   }
 
   handleFilter(value) {
     this.queryBuilder.addParam("filterType", value);
+    this.queryBuilder.addParam("offset", 0);
     this.makeGETRequest();
   }
 
   handleSort(value) {
     this.queryBuilder.addParam("sortType", value);
+    this.queryBuilder.addParam("offset", 0);
     this.makeGETRequest();
   }
 
   handlePagination(whereTo = "next") {
-    console.log(whereTo);
-    // const offset = this.model.getPaginationData(whereTo);
-    // this.queryBuilder.addParam("offset", offset);
-    // this.makeGETRequest();
+    const currentOffset = this.queryBuilder.getOffset();
+    const offset = this.model.paginate(whereTo, currentOffset);
+    if (currentOffset === offset) {
+      return;
+    }
+
+    this.queryBuilder.addParam("offset", offset);
+    this.makeGETRequest();
   }
 
   makeGETRequest() {

@@ -22,7 +22,10 @@ export class SearchFilterController {
       return;
     }
     this.view.reRenderFilterName(value);
-
-    this.notify("filter", value);
+    if (value === "all") {
+      this.notify("filter", "");
+    } else {
+      this.notify("filter", value);
+    }
   }
 }

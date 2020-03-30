@@ -8,12 +8,13 @@ class PetsController {
   async getPets(req, res, next) {
     try {
       const specificReq = req.query;
+      console.log(specificReq);
 
       const order = [];
-      const where = {};
+      const searchAndFilter = {};
 
       const fullRequest = {
-        limit: parseInt(specificReq.limit) || 50,
+        limit: parseInt(specificReq.limit) || 9,
         offset: parseInt(specificReq.offset) || 0
       };
 
@@ -42,24 +43,24 @@ class PetsController {
 
       // resolving query string for Filter
       if (specificReq.filterType) {
-        where.species = specificReq.filterType;
-        fullRequest.where = where;
+        searchAndFilter.species = specificReq.filterType;
+        fullRequest.where = searchAndFilter;
       }
 
       // resolving query string for Search
       if (specificReq.search) {
-        where.breed = {
+        searchAndFilter.breed = {
           [Op.like]: `%${specificReq.search}%`
         };
-        fullRequest.where = where;
+        fullRequest.where = searchAndFilter;
       }
 
-      const pets = {
-        total: await petsService.getAmount(),
+      const data = {
+        total: await petsService.getAmount(fullRequest),
         pets: await petsService.findMany(fullRequest)
       };
 
-      res.json(pets);
+      res.json(data);
     } catch (e) {
       next(e);
     }
