@@ -16,6 +16,7 @@ export class AnimalController {
     this.subscribe("filter", this.handleFilter.bind(this));
     this.subscribe("sort", this.handleSort.bind(this));
     this.subscribe("pagination", this.handlePagination.bind(this));
+    this.subscribe("orderCompleted", this.handleLoadAnimals.bind(this));
   }
 
   handleCart(event) {

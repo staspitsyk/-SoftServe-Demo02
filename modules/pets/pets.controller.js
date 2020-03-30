@@ -7,7 +7,7 @@ class PetsController {
 
     async findMany(req, res, next) {
         try {
-            const pets = await petsService.findMany();
+            const pets = await petsService.findMany({ where: { isSold: false } });
             res.json(pets);
         } catch (e) {
             next(e);

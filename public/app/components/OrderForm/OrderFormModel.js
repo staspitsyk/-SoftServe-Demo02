@@ -57,13 +57,15 @@ export class OrderFormModel {
     const body = JSON.stringify(order);
 
     try {
-      await fetch(url, {
+      const response = await fetch(url, {
         method: 'POST',
         body, 
         headers: {
           'Content-Type': 'application/json'
         }
       });
+      const json = await response.json();
+      return json;
     } catch (error) {
       console.log(error);
     }

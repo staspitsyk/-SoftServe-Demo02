@@ -81,7 +81,9 @@ export class OrderFormController {
       date: new Date(),
       orderAnimalsIds: this.cartInfo.orderAnimalsIds,
     };
-    this.model.postOrder(order);
+    this.model
+    .postOrder(order)
+    .then(json => this.notify("orderCompleted"));
 
     this.model.setToLocalStorage(order);
     this.notify("orders-history", this.model.ordersHistory);
