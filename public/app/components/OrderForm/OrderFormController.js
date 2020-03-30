@@ -83,7 +83,10 @@ export class OrderFormController {
     };
     this.model
     .postOrder(order)
-    .then(json => this.notify("orderCompleted"));
+    .then(json => {
+      console.log(json);
+      this.notify("orderCompleted")
+    });
 
     this.model.setToLocalStorage(order);
     this.notify("orders-history", this.model.ordersHistory);
