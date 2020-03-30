@@ -3,7 +3,7 @@ const PetsModel = require('./pets.model');
 class PetsService {
 
     async findMany() {
-        return PetsModel.findAll();
+        return PetsModel.findAll({ where: { isSold: false } });
     }
 
     async findOneById(id, transaction) {

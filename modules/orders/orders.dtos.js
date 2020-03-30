@@ -5,7 +5,7 @@ const CreateOrderDto = Joi.object().keys({
     phone: Joi.number().integer().required(),
     email: Joi.string().email().required(),
     products: Joi.number().integer().min(1).required(),
-    totalPrice: Joi.number().integer().required(),
+    totalPrice: Joi.number().required(),
     date: Joi.date().required(),
     orderAnimalsIds: Joi.array().items(Joi.number()).required(),
 });
