@@ -19,6 +19,7 @@ module.exports = {
       is_sterile: { type: Sequelize.BOOLEAN },
       hair: { type: Sequelize.STRING },
       description: { type: Sequelize.STRING(1000) },
+      isSold: { type: Sequelize.BOOLEAN },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

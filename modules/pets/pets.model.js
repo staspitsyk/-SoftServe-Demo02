@@ -17,7 +17,8 @@ const PetsModel = Pets.init({
     image: { type: DataTypes.STRING, allowNull: true },
     is_sterile: { type: DataTypes.BOOLEAN, allowNull: true },
     hair: { type: DataTypes.STRING, allowNull: true },
-    description: { type: DataTypes.STRING(1000), allowNull: true }
+    description: { type: DataTypes.STRING(1000), allowNull: true },
+    isSold: { type: DataTypes.BOOLEAN, allowNull: true },
 }, { sequelize });
 
 // PetsModel.items = PetsModel.hasMany(OrderItemModel);

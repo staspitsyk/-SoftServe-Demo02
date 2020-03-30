@@ -6,8 +6,8 @@ class PetsService {
         return PetsModel.findAll();
     }
 
-    async findOneById(id) {
-        const pet = await PetsModel.findOne({ where: { id } });
+    async findOneById(id, transaction) {
+        const pet = await PetsModel.findOne({ where: { id }, transaction });
 
         if (!pet) {
             console.log('Pet not found');
@@ -35,6 +35,16 @@ class PetsService {
         const pet = await this.findOneById(id);
         pet.destroy();
         return { id: pet.id };
+    }
+
+    async updateOne(id, petData, transaction) {
+        await this.findOneById(id, transaction);
+        await PetsModel.update( petData, { where: { id }, transaction } );
+        // return this.findOneById
+    }
+
+    async updateSold(id, transaction) {
+        PetsModel.update( {isSold: true}, { where: { id }, transaction })
     }
 
 }

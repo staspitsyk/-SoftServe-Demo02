@@ -13,6 +13,7 @@ const db_data = data.map(obj => {
     is_sterile: obj.is_sterile,
     hair: obj.hair,
     description: obj.description,
+    isSold: false,
     createdAt: new Date(),
     updatedAt: new Date(),
   }
