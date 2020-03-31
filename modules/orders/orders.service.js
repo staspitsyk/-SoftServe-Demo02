@@ -34,7 +34,7 @@ class OrdersService {
             await Promise.all(arrOfPromisesOrder);
             await Promise.all(arrOfPromisesPets);
 
-            // await sendMail();
+            await sendMail(order, customer);
 
             return order;
 

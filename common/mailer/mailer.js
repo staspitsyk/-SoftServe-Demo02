@@ -1,10 +1,9 @@
 const nodemailer = require('nodemailer');
 
-async function sendMail() {
-    // const testEmailAccount = await nodemailer.createTestAccount();
+async function sendMail({ products, totalPrice }, { name, phone, email }) {
 
     const transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
+        service: 'gmail',
         port: 587,
         secure: false,
         auth: {
@@ -15,9 +14,9 @@ async function sendMail() {
 
     const result = await transporter.sendMail({
         from: '"Node js <softservedemomailer@gmail.com>',
-        to: 'staspitsyk@gmail.com',
+        to: 'softservedemomailer@gmail.com',
         subject: 'Message from Node js',
-        text: 'This message was sent from Node js server.',
+        text: `Customer ${name} bought ${products} amount of products, total price: ${totalPrice}. Contacts phone number: ${phone}, email: ${email}.`,
     });
 
     console.log(result);
