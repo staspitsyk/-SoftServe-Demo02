@@ -44,12 +44,15 @@ class OrdersService {
     }
 
     async findMany() {
-        return OrdersModel.findAll({
-            include: [OrderItemModel, CustomersModel]
-        });
-        // return OrdersModel.findAll();
-    }
 
+        return OrdersModel.findAll({
+            attributes:['id', 'products', 'totalPrice', "date", 'customerId'],
+            include: [
+                { model: OrderItemModel, attributes:['id', 'orderId', 'petId'], include: [{model: PetsModel, attributes:['id', 'species', 'isSold', "breed"]} ] },
+                { model: CustomersModel, attributes:['id', 'name', 'phone', "email"] }
+            ]
+        });
+    }
 }
 
 module.exports = new OrdersService();

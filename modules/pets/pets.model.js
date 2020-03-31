@@ -21,6 +21,4 @@ const PetsModel = Pets.init({
     isSold: { type: DataTypes.BOOLEAN, allowNull: true },
 }, { sequelize });
 
-// PetsModel.items = PetsModel.hasMany(OrderItemModel);
-
 module.exports = PetsModel;
