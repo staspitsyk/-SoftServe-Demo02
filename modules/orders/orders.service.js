@@ -3,6 +3,7 @@ const  OrderItemModel = require('./orders.item-model');
 const PetsModel = require('../pets/pets.model');
 const customersService = require('../customers/customers.service');
 const petsService = require('../pets/pets.service');
+const sendMail = require('../../common/mailer/mailer');
 
 const sequelize = require('../../db');
 
@@ -31,6 +32,8 @@ class OrdersService {
 
             await Promise.all(arrOfPromisesOrder);
             await Promise.all(arrOfPromisesPets);
+
+            // await sendMail();
 
             return order;
 
