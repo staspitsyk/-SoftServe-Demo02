@@ -8,8 +8,8 @@ export class CartModel {
     if (isNotUnique) {
       return {
         animals: this.animals,
-        isNotUnique: true,
-      }
+        isNotUnique: true
+      };
     }
 
     this.animals.push(animal);
@@ -17,8 +17,8 @@ export class CartModel {
 
     return {
       animals: this.animals,
-      isNotUnique: false,
-    }
+      isNotUnique: false
+    };
   }
 
   removeFromCart(id) {
@@ -32,6 +32,11 @@ export class CartModel {
 
   checkIfUnique(animal) {
     return this.animals.some(item => animal.id === item.id);
+  }
+
+  clearCart() {
+    this.animals.length = 0;
+    localStorage.setItem("cart", JSON.stringify(this.animals));
   }
 
   calcSum() {

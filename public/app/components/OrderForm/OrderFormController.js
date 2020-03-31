@@ -3,24 +3,18 @@ import { OrderFormModel } from "./OrderFormModel.js";
 
 export class OrderFormController {
   constructor({ subscribe, notify }) {
+    this.handlers = {
+      handleName: this.handleName.bind(this),
+      handlePhone: this.handlePhone.bind(this),
+      handleEmail: this.handleEmail.bind(this),
+      handleOrder: this.handleOrder.bind(this)
+    };
     this.model = new OrderFormModel();
-    this.view = new OrderFormView(
-      this.handleName.bind(this),
-      this.handlePhone.bind(this),
-      this.handleEmail.bind(this),
-      this.handleOrder.bind(this)
-    );
+    this.view = new OrderFormView(this.handlers);
 
     this.notify = notify;
     this.subscribe = subscribe;
     this.subscribe("get-order", this.getCartInfo.bind(this));
-
-    // this.handlers = {
-    //   handleName: this.handleName.bind(this),
-    //   handlePhone: this.handlePhone.bind(this),
-    //   handleEmail: this.handleEmail.bind(this),
-    //   handleOrder: this.handleOrder.bind(this)
-    // };
   }
 
   checkAllFields() {
@@ -79,16 +73,14 @@ export class OrderFormController {
       products: this.cartInfo.amountOfProducts,
       totalPrice: this.cartInfo.totalPrice,
       date: new Date(),
-      orderAnimalsIds: this.cartInfo.orderAnimalsIds,
+      orderAnimalsIds: this.cartInfo.orderAnimalsIds
     };
-    this.model
-    .postOrder(order)
-    .then(json => {
-      console.log(json);
-      this.notify("orderCompleted")
+    this.model.postOrder(order).then(json => {
+      // console.log(json);
+      this.notify("orderCompleted");
     });
 
     this.model.setToLocalStorage(order);
-    this.notify("orders-history", this.model.ordersHistory);
+    this.notify("clear-cart");
   }
 }

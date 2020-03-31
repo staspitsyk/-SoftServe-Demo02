@@ -7,13 +7,16 @@ export class CartView {
     this.notUniqueModal = document.querySelector(".not-unique-modal");
     this.notUniqueAnimal = document.querySelector(".not-unique-animal");
     this.notUniqueButton = document.querySelector(".not-unique-modal-btn");
-    this.notUniqueButton.addEventListener("click", this.hideNotUniqueModal.bind(this));
+    this.notUniqueButton.addEventListener(
+      "click",
+      this.hideNotUniqueModal.bind(this)
+    );
     this.removeFromCart = removeFromCart;
     this.handleOrder = handleOrder;
     this.makeOrderBtn.addEventListener("click", this.handleOrder);
   }
 
-  renderAnimals(animals, totalPrice) {
+  renderAnimals(animals = [], totalPrice = 0) {
     this.disableButton(animals.length);
     this.renderBadge(animals.length);
     const output = animals

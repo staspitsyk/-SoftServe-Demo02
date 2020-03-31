@@ -13,6 +13,7 @@ export class CartController {
     this.notify = notify;
     this.subscribe = subscribe;
     this.subscribe("get-cart", this.cartAdd.bind(this));
+    this.subscribe("clear-cart", this.clearCart.bind(this));
   }
 
   cartShow() {
@@ -39,11 +40,20 @@ export class CartController {
     this.view.renderAnimals(cart, totalPrice);
   }
 
+  clearCart() {
+    this.model.clearCart();
+    this.view.renderAnimals();
+  }
+
   handleOrder() {
     const cart = this.model.animals;
     const orderAnimalsIds = cart.map(({ id }) => id);
     console.log(cart);
     const totalPrice = this.model.calcSum();
-    this.notify("get-order", { amountOfProducts: cart.length, totalPrice, orderAnimalsIds });
+    this.notify("get-order", {
+      amountOfProducts: cart.length,
+      totalPrice,
+      orderAnimalsIds
+    });
   }
 }

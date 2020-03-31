@@ -1,5 +1,6 @@
 export class OrderFormView {
-  constructor(handleName, handlePhone, handleEmail, handleOrder) {
+  constructor({ handleName, handlePhone, handleEmail, handleOrder }) {
+    // constructor(handleName, handlePhone, handleEmail, handleOrder) {
     this.form = document.forms["order-form"];
     this.name = this.form["user-name"];
     this.phone = this.form["user-phone"];

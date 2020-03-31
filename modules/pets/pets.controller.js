@@ -13,7 +13,7 @@ class PetsController {
       const searchAndFilter = {};
 
       const fullRequest = {
-        limit: parseInt(specificReq.limit) || 9,
+        limit: 9,
         offset: parseInt(specificReq.offset) || 0,
         where: { isSold: false }
       };
