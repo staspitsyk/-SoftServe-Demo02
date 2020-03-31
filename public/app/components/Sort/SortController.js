@@ -13,6 +13,7 @@ export class SortController {
       return;
     }
     this.view.reRenderSortName(newSortName);
+
     this.notify("sort", value);
   }
 }

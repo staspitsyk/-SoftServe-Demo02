@@ -7,14 +7,65 @@ const { Op } = require("sequelize");
 class PetsController {
   async findMany(req, res, next) {
     try {
-      const pets = await petsService.findMany();
-      res.json(pets);
+      const specificReq = req.query;
+
+      const order = [];
+      const searchAndFilter = {};
+
+      const fullRequest = {
+        limit: parseInt(specificReq.limit) || 9,
+        offset: parseInt(specificReq.offset) || 0
+      };
+
+      // resolving query string for Sort
+      if (specificReq.sortType) {
+        switch (specificReq.sortType) {
+          case "priceLow": {
+            order.push(["price", "ASC"]);
+            break;
+          }
+          case "priceHigh": {
+            order.push(["price", "DESC"]);
+            break;
+          }
+          case "ageHigh": {
+            order.push(["birth_date", "ASC"]);
+            break;
+          }
+          case "ageLow": {
+            order.push(["birth_date", "DESC"]);
+            break;
+          }
+        }
+        fullRequest.order = order;
+      }
+
+      // resolving query string for Filter
+      if (specificReq.filterType) {
+        searchAndFilter.species = specificReq.filterType;
+        fullRequest.where = searchAndFilter;
+      }
+
+      // resolving query string for Search
+      if (specificReq.search) {
+        searchAndFilter.breed = {
+          [Op.like]: `%${specificReq.search}%`
+        };
+        fullRequest.where = searchAndFilter;
+      }
+
+      const data = {
+        total: await petsService.getAmount(fullRequest),
+        pets: await petsService.findMany(fullRequest)
+      };
+
+      res.json(data);
     } catch (e) {
       next(e);
     }
   }
 
-  async findOneById(req, res, next) {
+  async findById(req, res, next) {
     try {
       const pet = await petsService.findOneById(req.params.id);
       res.json(pet);

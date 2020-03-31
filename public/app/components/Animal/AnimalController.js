@@ -2,13 +2,15 @@ import { AnimalModel } from "./AnimalModel.js";
 import { AnimalView } from "./AnimalView.js";
 
 export class AnimalController {
-  constructor({ subscribe, notify }) {
+  constructor({ subscribe, notify }, queryBuilder) {
     this.model = new AnimalModel();
     this.view = new AnimalView(
       this.handleCart.bind(this),
       this.handleDetails.bind(this)
     );
     this.handleLoadAnimals();
+
+    this.queryBuilder = queryBuilder;
 
     this.notify = notify;
     this.subscribe = subscribe;
@@ -37,23 +39,41 @@ export class AnimalController {
       .then(animals => this.view.renderAnimals(animals));
   }
 
-  handleSearch(str) {
-    const animals = this.model.globalFilter({ search: str });
-    this.view.renderAnimals(animals);
+  handleSearch(value) {
+    this.queryBuilder.addParam("search", value);
+    this.queryBuilder.addParam("offset", 0);
+    this.makeGETRequest();
   }
 
-  handleFilter(str) {
-    const animals = this.model.globalFilter({ filter: str });
-    this.view.renderAnimals(animals);
+  handleFilter(value) {
+    this.queryBuilder.addParam("filterType", value);
+    this.queryBuilder.addParam("offset", 0);
+    this.makeGETRequest();
   }
 
-  handleSort(condition) {
-    const animals = this.model.globalFilter({ sort: condition });
-    this.view.renderAnimals(animals);
+  handleSort(value) {
+    this.queryBuilder.addParam("sortType", value);
+    this.queryBuilder.addParam("offset", 0);
+    this.makeGETRequest();
   }
 
   handlePagination(whereTo = "next") {
-    const animals = this.model.getPaginationData(whereTo);
-    this.view.renderAnimals(animals);
+    const currentOffset = this.queryBuilder.getOffset();
+    const offset = this.model.paginate(whereTo, currentOffset);
+    if (currentOffset === offset) {
+      return;
+    }
+
+    this.queryBuilder.addParam("offset", offset);
+    this.makeGETRequest();
+  }
+
+  makeGETRequest() {
+    const queryString = this.queryBuilder.build();
+    const link = this.model.getLink(queryString);
+    console.log(link);
+    this.model
+      .getArrOfAnimals(link)
+      .then(animals => this.view.renderAnimals(animals));
   }
 }

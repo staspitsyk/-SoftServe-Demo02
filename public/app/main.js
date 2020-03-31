@@ -6,9 +6,11 @@ import { PaginationController } from "./components/Pagination/PaginationControll
 import { CartController } from "./components/Cart/CartController.js";
 import { DetailsController } from "./components/Details/DetailsController.js";
 import { OrderFormController } from "./components/OrderForm/OrderFormController.js";
+import { QueryBuilder } from "./helper/Builder.js";
 
+const queryBuilder = new QueryBuilder();
 const publisher = new Publisher();
-const animal = new AnimalController(publisher.methods);
+const animal = new AnimalController(publisher.methods, queryBuilder);
 const search = new SearchFilterController(publisher.methods);
 const sort = new SortController(publisher.methods);
 const pagination = new PaginationController(publisher.methods);

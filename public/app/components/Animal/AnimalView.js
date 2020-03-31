@@ -6,6 +6,14 @@ export class AnimalView {
   }
 
   renderAnimals(animals) {
+    if (!animals.length) {
+      this.container.innerHTML = `
+        <div class='container mb-3 font-weight-bold text-black'>
+          Sorry, no matches found 
+        </div>
+      `;
+      return;
+    }
     const output = animals.map(animal => this.getSingleAnimal(animal)).join("");
     this.container.innerHTML = `
       <div class='row'>
