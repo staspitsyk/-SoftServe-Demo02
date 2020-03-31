@@ -1,5 +1,6 @@
 const  OrdersModel  = require('./orders.model');
 const  OrderItemModel = require('./orders.item-model');
+const CustomersModel = require('../customers/customers.model');
 const PetsModel = require('../pets/pets.model');
 const customersService = require('../customers/customers.service');
 const petsService = require('../pets/pets.service');
@@ -40,6 +41,13 @@ class OrdersService {
         });
 
         return result;
+    }
+
+    async findMany() {
+        return OrdersModel.findAll({
+            include: [OrderItemModel, CustomersModel]
+        });
+        // return OrdersModel.findAll();
     }
 
 }

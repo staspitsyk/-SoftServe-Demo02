@@ -13,12 +13,20 @@ const OrdersModel = Orders.init({
     date: { type: DataTypes.DATE, allowNull: false },
 }, { sequelize });
 
-OrderItemModel.order = OrderItemModel.belongsTo(OrdersModel, { foreignKeyConstraint: true, foreignKey: 'orderId', targetKey: 'id' });
-OrderItemModel.pet = OrderItemModel.belongsTo(PetsModel, { foreignKeyConstraint: true, foreignKey: 'petId', targetKey: 'id' });
-OrdersModel.customer = OrdersModel.belongsTo(CustomersModel, { foreignKeyConstraint: true, foreignKey: 'customerId', targetKey: 'id' });
+// OrderItemModel.order = OrderItemModel.belongsTo(OrdersModel, { foreignKeyConstraint: true, foreignKey: 'orderId', targetKey: 'id' });
+// OrderItemModel.pet = OrderItemModel.belongsTo(PetsModel, { foreignKeyConstraint: true, foreignKey: 'petId', targetKey: 'id' });
+// OrdersModel.customer = OrdersModel.belongsTo(CustomersModel, { foreignKeyConstraint: true, foreignKey: 'customerId', targetKey: 'id' });
 
-OrdersModel.items = OrdersModel.hasMany(OrderItemModel);
-CustomersModel.customers = CustomersModel.hasMany(OrdersModel);
-PetsModel.items = PetsModel.hasMany(OrderItemModel);
+// OrdersModel.items = OrdersModel.hasMany(OrderItemModel);
+// CustomersModel.customers = CustomersModel.hasMany(OrdersModel);
+// PetsModel.items = PetsModel.hasMany(OrderItemModel);
+
+// OrderItemModel.belongsTo(OrdersModel, { foreignKeyConstraint: true, foreignKey: 'orderId', targetKey: 'id' });
+// OrderItemModel.belongsTo(PetsModel, { foreignKeyConstraint: true, foreignKey: 'petId', targetKey: 'id' });
+OrdersModel.belongsTo(CustomersModel, { foreignKeyConstraint: true, foreignKey: 'customerId', targetKey: 'id' });
+
+OrdersModel.hasMany(OrderItemModel, {foreignKeyConstraint: true, foreignKey: 'orderId', targetKey: 'id' });
+// CustomersModel.hasMany(OrdersModel);
+// PetsModel.hasMany(OrderItemModel);
 
 module.exports = OrdersModel;

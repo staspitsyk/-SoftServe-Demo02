@@ -11,6 +11,15 @@ class OrdersController {
         }
     }
 
+    async findMany(req, res, next) {
+        try {
+            const order = await ordersService.findMany();
+            res.json(order);
+        } catch (e) {
+            next(e);
+        }
+    }
+
 }
 
 module.exports = new OrdersController();

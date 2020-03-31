@@ -7,4 +7,6 @@ const router = new Router();
 
 router.post('/', createValidator(CreateOrderDto), ordersController.createOne);
 
+router.get('/', ordersController.findMany);
+
 module.exports = router;
