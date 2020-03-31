@@ -14,7 +14,8 @@ class PetsController {
 
       const fullRequest = {
         limit: parseInt(specificReq.limit) || 9,
-        offset: parseInt(specificReq.offset) || 0
+        offset: parseInt(specificReq.offset) || 0,
+        where: { isSold: false }
       };
 
       // resolving query string for Sort
@@ -43,7 +44,7 @@ class PetsController {
       // resolving query string for Filter
       if (specificReq.filterType) {
         searchAndFilter.species = specificReq.filterType;
-        fullRequest.where = searchAndFilter;
+        fullRequest.where = Object.assign(fullRequest.where, searchAndFilter);
       }
 
       // resolving query string for Search
@@ -51,7 +52,8 @@ class PetsController {
         searchAndFilter.breed = {
           [Op.like]: `%${specificReq.search}%`
         };
-        fullRequest.where = searchAndFilter;
+        fullRequest.where = Object.assign(fullRequest.where, searchAndFilter);
+        // fullRequest.where = searchAndFilter;
       }
 
       const data = {

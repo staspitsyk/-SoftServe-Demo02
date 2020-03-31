@@ -16,6 +16,11 @@ class PetsService {
     return pet;
   }
 
+  async getAmount(findType) {
+    const amount = await PetsModel.count(findType);
+    return amount;
+  }
+
   async createOne(animalData) {
     const existingAnimal = await PetsModel.findOne({
       where: { id: animalData.id }
