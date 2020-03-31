@@ -1,52 +1,49 @@
-const PetsModel = require('./pets.model');
+const PetsModel = require("./pets.model");
 
 class PetsService {
+  async findMany() {
+    return PetsModel.findAll({ where: { isSold: false } });
+  }
 
-    async findMany() {
-        return PetsModel.findAll({ where: { isSold: false } });
+  async findOneById(id, transaction) {
+    const pet = await PetsModel.findOne({ where: { id }, transaction });
+
+    if (!pet) {
+      console.log("Pet not found");
     }
 
-    async findOneById(id, transaction) {
-        const pet = await PetsModel.findOne({ where: { id }, transaction });
+    return pet;
+  }
 
-        if (!pet) {
-            console.log('Pet not found');
-        }
+  async createOne(animalData) {
+    const existingAnimal = await PetsModel.findOne({
+      where: { id: animalData.id }
+    });
 
-        return pet;
+    if (existingAnimal) {
+      console.log("already exist");
+      return;
     }
 
-    async createOne(animalData) {
-        const existingAnimal = await PetsModel.findOne({
-            where: { id: animalData.id }
-        });
+    const petsModel = new PetsModel(animalData);
+    const savedProduct = await productModel.save();
+    return savedProduct;
+  }
 
-        if (existingAnimal) {
-            console.log('already exist');
-            return;
-        }
+  async removeOne(id) {
+    const pet = await this.findOneById(id);
+    pet.destroy();
+    return { id: pet.id };
+  }
 
-        const petsModel = new PetsModel(animalData);
-        const savedProduct = await productModel.save();
-        return savedProduct;
-    }
+  async updateOne(id, petData, transaction) {
+    await this.findOneById(id, transaction);
+    await PetsModel.update(petData, { where: { id }, transaction });
+  }
 
-    async removeOne(id) {
-        const pet = await this.findOneById(id);
-        pet.destroy();
-        return { id: pet.id };
-    }
-
-    async updateOne(id, petData, transaction) {
-        await this.findOneById(id, transaction);
-        await PetsModel.update( petData, { where: { id }, transaction } );
-        // return this.findOneById
-    }
-
-    async updateSold(id, transaction) {
-        PetsModel.update( {isSold: true}, { where: { id }, transaction })
-    }
-
+  async updateSold(id, transaction) {
+    PetsModel.update({ isSold: true }, { where: { id }, transaction });
+  }
 }
 
 module.exports = new PetsService();
