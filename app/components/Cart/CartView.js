@@ -10,7 +10,7 @@ export class CartView {
     this.makeOrderBtn.addEventListener("click", this.handleOrder);
   }
 
-  renderAnimals(animals, totalPrice) {
+  renderAnimals(animals = [], totalPrice = 0) {
     this.disableButton(animals.length);
     this.renderBadge(animals.length);
     const output = animals

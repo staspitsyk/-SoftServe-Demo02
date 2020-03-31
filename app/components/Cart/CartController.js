@@ -13,6 +13,7 @@ export class CartController {
     this.notify = notify;
     this.subscribe = subscribe;
     this.subscribe("get-cart", this.cartAdd.bind(this));
+    this.subscribe("clear-cart", this.clearCart.bind(this));
   }
 
   cartShow() {
@@ -38,6 +39,11 @@ export class CartController {
     const cart = this.model.removeFromCart(id);
     const totalPrice = this.model.calcSum();
     this.view.renderAnimals(cart, totalPrice);
+  }
+
+  clearCart() {
+    this.model.clearCart();
+    this.view.renderAnimals();
   }
 
   handleOrder() {

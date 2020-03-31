@@ -28,6 +28,11 @@ export class CartModel {
     return this.animals.some(item => animal.id === item.id);
   }
 
+  clearCart() {
+    this.animals.length = 0;
+    localStorage.setItem("cart", JSON.stringify(this.animals));
+  }
+
   calcSum() {
     return this.animals.reduce((acc, curAnimal) => acc + curAnimal.price, 0);
   }
