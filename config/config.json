@@ -2,7 +2,7 @@
   "db": {
     "name": "petshop",
     "user": "postgres",
-    "password": "123456",
+    "password": "forDB12756",
     "host": "127.0.0.1",
     "port": 5432,
     "dialect": "postgres"
@@ -13,7 +13,7 @@
   },
   "development": {
     "username": "postgres",
-    "password": "123456",
+    "password": "forDB12756",
     "database": "petshop",
     "host": "127.0.0.1",
     "dialect": "postgres",

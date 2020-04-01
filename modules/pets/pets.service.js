@@ -1,5 +1,6 @@
 const PetsModel = require("./pets.model");
 const { Op } = require("sequelize");
+const NotFound = require("../../common/errors/not-found");
 
 class PetsService {
   async findMany(findType) {
@@ -10,7 +11,7 @@ class PetsService {
     const pet = await PetsModel.findOne({ where: { id }, transaction });
 
     if (!pet) {
-      console.log("Pet not found");
+      throw new NotFound("Pet not found");
     }
 
     return pet;
@@ -21,19 +22,20 @@ class PetsService {
     return amount;
   }
 
-  async createOne(animalData) {
-    const existingAnimal = await PetsModel.findOne({
-      where: { id: animalData.id }
-    });
+  // async createOne(animalData) {
+  //   const existingAnimal = await PetsModel.findOne({
+  //     where: { id: animalData.id }
+  //   });
 
-    if (existingAnimal) {
-      console.log("already exist");
-      return;
-    }
+  //   if (existingAnimal) {
+  //     throw new NotFound("Already exist");
+  //     // console.log("already exist");
+  //     // return;
+  //   }
 
-    const savedProduct = await productModel.save();
-    return savedProduct;
-  }
+  //   const savedProduct = await productModel.save();
+  //   return savedProduct;
+  // }
 
   async removeOne(id) {
     const pet = await this.findOneById(id);
