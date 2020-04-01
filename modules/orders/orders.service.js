@@ -11,12 +11,13 @@ const sequelize = require("../../db");
 class OrdersService {
   async createOne(orderData) {
     const result = await sequelize.transaction(async transaction => {
+      const { orderAnimalsIds } = orderData;
       const customer = await customersService.createOne(orderData, transaction);
       orderData.customerId = customer.id;
       const ordersModel = new OrdersModel(orderData);
       const order = await ordersModel.save({ transaction });
 
-      const arrOfPromisesOrder = orderData.orderAnimalsIds.map(async id => {
+      const arrOfPromisesOrder = orderAnimalsIds.map(async id => {
         const orderData = {
           petId: id,
           orderId: order.id
@@ -25,14 +26,14 @@ class OrdersService {
         return await ordersItemModel.save({ transaction });
       });
 
-      const arrOfPromisesPets = orderData.orderAnimalsIds.map(async id => {
+      const arrOfPromisesPets = orderAnimalsIds.map(async id => {
         return await petsService.updateSold(id, transaction);
       });
 
       await Promise.all(arrOfPromisesOrder);
       await Promise.all(arrOfPromisesPets);
 
-      await sendMail(order, customer);
+      await sendMail(order, customer, orderAnimalsIds);
 
       return order;
     });
