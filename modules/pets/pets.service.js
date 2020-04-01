@@ -34,7 +34,6 @@ class PetsService {
   }
 
   async updateOne(id, petData, transaction) {
-    // await this.findOneById(id, transaction);
     await PetsModel.update(petData, { where: { id }, transaction });
   }
 

@@ -5,6 +5,7 @@ const PetsModel = require("../pets/pets.model");
 const customersService = require("../customers/customers.service");
 const petsService = require("../pets/pets.service");
 const sendMail = require("../../common/mailer/mailer");
+const NotFound = require("../../common/errors/not-found");
 
 const sequelize = require("../../db");
 
@@ -42,7 +43,7 @@ class OrdersService {
   }
 
   async findMany() {
-    return OrdersModel.findAll({
+    const orders = OrdersModel.findAll({
       attributes: ["id", "products", "totalPrice", "date", "customerId"],
       include: [
         {
@@ -58,6 +59,12 @@ class OrdersService {
         { model: CustomersModel, attributes: ["id", "name", "phone", "email"] }
       ]
     });
+
+    if (!orders) {
+      throw new NotFound("Orders not found");
+    }
+
+    return orders;
   }
 }
 
