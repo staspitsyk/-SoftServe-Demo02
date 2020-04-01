@@ -22,10 +22,6 @@ export class SearchFilterController {
       return;
     }
     this.view.reRenderFilterName(value);
-    if (value === "all") {
-      this.notify("filter", "");
-    } else {
-      this.notify("filter", value);
-    }
+    this.notify("filter", value);
   }
 }

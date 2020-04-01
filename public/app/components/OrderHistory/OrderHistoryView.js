@@ -13,7 +13,7 @@ export class OrderHistoryView {
           <td>${index + 1}</td>
           <td>${order.name}</td>
           <td>${order.products}</td>
-          <td>${order.date}</td>
+          <td>${order.parsedDate}</td>
           <td>$${order.totalPrice}</td>
         </tr>
       `;

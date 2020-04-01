@@ -1,9 +1,9 @@
 const PetsModel = require("./pets.model");
+const { Op } = require("sequelize");
 
 class PetsService {
   async findMany(findType) {
     return PetsModel.findAll(findType);
-    // { where: { isSold: false } });
   }
 
   async findOneById(id, transaction) {
@@ -31,7 +31,6 @@ class PetsService {
       return;
     }
 
-    const petsModel = new PetsModel(animalData);
     const savedProduct = await productModel.save();
     return savedProduct;
   }
@@ -49,6 +48,69 @@ class PetsService {
 
   async updateSold(id, transaction) {
     PetsModel.update({ isSold: true }, { where: { id }, transaction });
+  }
+
+  getRequestOptions(query) {
+    const order = [];
+    const searchAndFilter = {};
+
+    const fullRequest = {
+      limit: 9,
+      offset: parseInt(query.offset) || 0,
+      where: { isSold: false }
+    };
+
+    // resolving query string for Sort
+    if (query.sortType) {
+      switch (query.sortType) {
+        case "priceLow": {
+          order.push(["price", "ASC"]);
+          break;
+        }
+        case "priceHigh": {
+          order.push(["price", "DESC"]);
+          break;
+        }
+        case "ageHigh": {
+          order.push(["birth_date", "ASC"]);
+          break;
+        }
+        case "ageLow": {
+          order.push(["birth_date", "DESC"]);
+          break;
+        }
+      }
+      fullRequest.order = order;
+    }
+
+    // resolving query string for Filter
+    if (query.filterType) {
+      switch (query.filterType) {
+        case "all": {
+          break;
+        }
+        case "other": {
+          searchAndFilter[Op.not] = [
+            { species: ["cat", "dog", "bird", "fish"] }
+          ];
+          break;
+        }
+        default: {
+          searchAndFilter.species = query.filterType;
+        }
+      }
+      fullRequest.where = Object.assign(fullRequest.where, searchAndFilter);
+    }
+
+    // resolving query string for Search
+    if (query.search) {
+      searchAndFilter.breed = {
+        [Op.like]: `%${query.search}%`
+      };
+      fullRequest.where = Object.assign(fullRequest.where, searchAndFilter);
+    }
+
+    return fullRequest;
   }
 }
 
