@@ -4,11 +4,13 @@ const NotFound = require("../../common/errors/not-found");
 
 class PetsService {
   async findMany(findType) {
-    return PetsModel.findAll(findType);
+    const pets = await PetsModel.findAll(findType);
+    return pets;
   }
 
   async findOneById(id, transaction) {
     const pet = await PetsModel.findOne({ where: { id }, transaction });
+    console.log(pet);
 
     if (!pet) {
       throw new NotFound("Pet not found");
@@ -22,29 +24,17 @@ class PetsService {
     return amount;
   }
 
-  // async createOne(animalData) {
-  //   const existingAnimal = await PetsModel.findOne({
-  //     where: { id: animalData.id }
-  //   });
-
-  //   if (existingAnimal) {
-  //     throw new NotFound("Already exist");
-  //     // console.log("already exist");
-  //     // return;
-  //   }
-
-  //   const savedProduct = await productModel.save();
-  //   return savedProduct;
-  // }
-
   async removeOne(id) {
     const pet = await this.findOneById(id);
+    if (!pet) {
+      throw new NotFound("Pet not found");
+    }
     pet.destroy();
     return { id: pet.id };
   }
 
   async updateOne(id, petData, transaction) {
-    await this.findOneById(id, transaction);
+    // await this.findOneById(id, transaction);
     await PetsModel.update(petData, { where: { id }, transaction });
   }
 

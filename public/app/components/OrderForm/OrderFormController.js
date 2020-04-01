@@ -76,11 +76,9 @@ export class OrderFormController {
       orderAnimalsIds: this.cartInfo.orderAnimalsIds
     };
     this.model.postOrder(order).then(json => {
-      // console.log(json);
       this.notify("orderCompleted");
+      this.model.setToLocalStorage(order);
+      this.notify("clear-cart");
     });
-
-    this.model.setToLocalStorage(order);
-    this.notify("clear-cart");
   }
 }

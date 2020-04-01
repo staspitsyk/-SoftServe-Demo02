@@ -48,7 +48,6 @@ export class CartController {
   handleOrder() {
     const cart = this.model.animals;
     const orderAnimalsIds = cart.map(({ id }) => id);
-    console.log(cart);
     const totalPrice = this.model.calcSum();
     this.notify("get-order", {
       amountOfProducts: cart.length,
